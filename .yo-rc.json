@@ -1,0 +1,53 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.oleksii.ulianov.trpgplanningapplication",
+      "nativeLanguage": "ua"
+    },
+    "jhipsterVersion": "6.7.1",
+    "applicationType": "monolith",
+    "baseName": "TrpgPlanningApplication",
+    "packageName": "com.oleksii.ulianov.trpgplanningapplication",
+    "packageFolder": "com/oleksii/ulianov/trpgplanningapplication",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "Mzg5ZGJhZTEwNWQ3Y2M4YzUzNjQwMjBjZGYzZTcwNzBlMjU5MjdiZWQ2M2U1YjhkMDE2MDAxNmZmZjcwNWVjYzI0YzI4YzM3YzY5MzZjNTc5OWEwNmNlMjhhYmE5MWMwYTNkNDExNWM2ODZhYzMwYWUzZTQ3NDkzYjM1MWRlZDU=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "vue",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1581893728100,
+    "testFrameworks": ["protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-vuejs",
+        "version": "1.5.1"
+      }
+    ],
+    "enableTranslation": true,
+    "nativeLanguage": "ua",
+    "languages": ["ua", "en", "ru"],
+    "blueprints": [
+      {
+        "name": "generator-jhipster-vuejs",
+        "version": "1.5.1"
+      }
+    ]
+  }
+}
