@@ -1,0 +1,50 @@
+entity GameSystem {
+	gameSystemName String required,
+    description String
+}
+
+entity GameTag {
+	gameTagName String required,
+    description String
+}
+
+enum GameStatus {
+	PENDING, IN_PROGRESS, CANCELLED, ENDED 
+}
+
+entity Character {
+	characterName String required,
+    isAlive Boolean
+}
+
+entity Game {
+	gameName String required,
+    playDate Instant required,
+    playersLimit Integer,
+    pictureURL String,
+    description String,
+    status GameStatus required
+}
+
+relationship ManyToOne {
+	Character{user} to User
+}
+
+relationship ManyToOne {
+	Game{gameSystem} to GameSystem,
+    Character{gameSystem} to GameSystem
+ }
+
+relationship ManyToMany {
+	Game{tags(gameTagName)} to GameTag{game},
+    Game{characters(characterName)} to Character{game}
+}
+
+paginate Character with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+

@@ -48,6 +48,8 @@
         "name": "generator-jhipster-vuejs",
         "version": "1.5.1"
       }
-    ]
+    ],
+    "herokuAppName": "trpg-planning-application",
+    "herokuDeployType": "git"
   }
 }

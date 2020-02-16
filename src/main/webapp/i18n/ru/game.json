@@ -1,0 +1,30 @@
+{
+  "trpgPlanningApplicationApp": {
+    "game": {
+      "home": {
+        "title": "Games",
+        "createLabel": "Создать новый Game",
+        "createOrEditLabel": "Создать или отредактировать Game",
+        "notFound": "No Games found"
+      },
+      "created": "Новый Game создан с идентификатором {{ param }}",
+      "updated": "Game обновлен с идентификатором {{ param }}",
+      "deleted": "Game удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Game {{ id }}?"
+      },
+      "detail": {
+        "title": "Game"
+      },
+      "gameName": "Game Name",
+      "playDate": "Play Date",
+      "playersLimit": "Players Limit",
+      "pictureURL": "Picture URL",
+      "description": "Description",
+      "status": "Status",
+      "gameSystem": "Game System",
+      "tags": "Tags",
+      "characters": "Characters"
+    }
+  }
+}

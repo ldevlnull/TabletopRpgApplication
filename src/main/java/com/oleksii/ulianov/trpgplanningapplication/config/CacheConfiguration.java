@@ -42,6 +42,14 @@ public class CacheConfiguration {
             createCache(cm, com.oleksii.ulianov.trpgplanningapplication.domain.User.class.getName());
             createCache(cm, com.oleksii.ulianov.trpgplanningapplication.domain.Authority.class.getName());
             createCache(cm, com.oleksii.ulianov.trpgplanningapplication.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.oleksii.ulianov.trpgplanningapplication.domain.GameSystem.class.getName());
+            createCache(cm, com.oleksii.ulianov.trpgplanningapplication.domain.GameTag.class.getName());
+            createCache(cm, com.oleksii.ulianov.trpgplanningapplication.domain.GameTag.class.getName() + ".games");
+            createCache(cm, com.oleksii.ulianov.trpgplanningapplication.domain.Character.class.getName());
+            createCache(cm, com.oleksii.ulianov.trpgplanningapplication.domain.Character.class.getName() + ".games");
+            createCache(cm, com.oleksii.ulianov.trpgplanningapplication.domain.Game.class.getName());
+            createCache(cm, com.oleksii.ulianov.trpgplanningapplication.domain.Game.class.getName() + ".tags");
+            createCache(cm, com.oleksii.ulianov.trpgplanningapplication.domain.Game.class.getName() + ".characters");
             // jhipster-needle-ehcache-add-entry
         };
     }

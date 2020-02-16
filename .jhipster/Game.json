@@ -1,0 +1,74 @@
+{
+    "name": "Game",
+    "fields": [
+        {
+            "fieldName": "gameName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "playDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "playersLimit",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "pictureURL",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "GameStatus",
+            "fieldValues": "PENDING,IN_PROGRESS,CANCELLED,ENDED",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "gameSystem",
+            "otherEntityRelationshipName": "game",
+            "relationshipName": "gameSystem",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "gameTag",
+            "otherEntityRelationshipName": "game",
+            "relationshipName": "tags",
+            "otherEntityField": "gameTagName",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "character",
+            "otherEntityRelationshipName": "game",
+            "relationshipName": "characters",
+            "otherEntityField": "characterName",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200216230300",
+    "entityTableName": "game",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

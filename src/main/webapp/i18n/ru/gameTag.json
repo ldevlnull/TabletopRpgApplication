@@ -1,0 +1,24 @@
+{
+  "trpgPlanningApplicationApp": {
+    "gameTag": {
+      "home": {
+        "title": "Game Tags",
+        "createLabel": "Создать новый Game Tag",
+        "createOrEditLabel": "Создать или отредактировать Game Tag",
+        "notFound": "No Game Tags found"
+      },
+      "created": "Новый Game Tag создан с идентификатором {{ param }}",
+      "updated": "Game Tag обновлен с идентификатором {{ param }}",
+      "deleted": "Game Tag удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Game Tag {{ id }}?"
+      },
+      "detail": {
+        "title": "Game Tag"
+      },
+      "gameTagName": "Game Tag Name",
+      "description": "Description",
+      "game": "Game"
+    }
+  }
+}

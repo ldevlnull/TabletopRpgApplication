@@ -25,6 +25,22 @@
                         <font-awesome-icon icon="th-list" />
                         <span v-text="$t('global.menu.entities.main')">Entities</span>
                     </span>
+                    <b-dropdown-item to="/game-system">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.gameSystem')">GameSystem</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/game-tag">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.gameTag')">GameTag</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/character">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.character')">Character</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/game">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.game')">Game</span>
+                    </b-dropdown-item>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </b-nav-item-dropdown>
                 <b-nav-item-dropdown

@@ -1,0 +1,26 @@
+{
+  "trpgPlanningApplicationApp": {
+    "character": {
+      "home": {
+        "title": "Characters",
+        "createLabel": "Создать новый Character",
+        "createOrEditLabel": "Создать или отредактировать Character",
+        "notFound": "No Characters found"
+      },
+      "created": "Новый Character создан с идентификатором {{ param }}",
+      "updated": "Character обновлен с идентификатором {{ param }}",
+      "deleted": "Character удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Character {{ id }}?"
+      },
+      "detail": {
+        "title": "Character"
+      },
+      "characterName": "Character Name",
+      "isAlive": "Is Alive",
+      "user": "User",
+      "gameSystem": "Game System",
+      "game": "Game"
+    }
+  }
+}

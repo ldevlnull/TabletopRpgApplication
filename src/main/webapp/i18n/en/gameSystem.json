@@ -1,0 +1,23 @@
+{
+  "trpgPlanningApplicationApp": {
+    "gameSystem": {
+      "home": {
+        "title": "Game Systems",
+        "createLabel": "Create a new Game System",
+        "createOrEditLabel": "Create or edit a Game System",
+        "notFound": "No Game Systems found"
+      },
+      "created": "A new Game System is created with identifier {{ param }}",
+      "updated": "A Game System is updated with identifier {{ param }}",
+      "deleted": "A Game System is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Game System {{ id }}?"
+      },
+      "detail": {
+        "title": "Game System"
+      },
+      "gameSystemName": "Game System Name",
+      "description": "Description"
+    }
+  }
+}
