@@ -121,7 +121,17 @@
       "maxbytes": "Это поле не может быть больше, чем {{max}} байтов.",
       "pattern": "Это поле должно следовать модели {{pattern}}.",
       "number": "Это поле должно быть число.",
-      "datetimelocal": "Это поле должно быть дата и время."
+      "datetimelocal": "Это поле должно быть дата и время.",
+      "minDate": "Дата не может быть в прошлом.",
+      "between": "Это поле должно быть от {{ min }} до {{ max }}.",
+      "game": {
+        "gameName": {
+          "minLength": "Имя игры должно быть хотя бы {{ $v.game.gameName.$params.minLength.min }} символов в длину."
+        },
+        "playersLimit": {
+          "between": "Ограничение количества игроков должно быть в диапазоне от {{ $v.game.playersLimit.$params.between.min }} до {{ $v.game.playersLimit.$params.between.max }}."
+        }
+      }
     }
   },
   "error": {

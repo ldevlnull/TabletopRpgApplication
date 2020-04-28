@@ -122,7 +122,17 @@
       "pattern": "This field should follow pattern for {{ pattern }}.",
       "number": "This field should be a number.",
       "datetimelocal": "This field should be a date and time.",
-      "patternLogin": "This field can only contain letters, digits and e-mail addresses."
+      "patternLogin": "This field can only contain letters, digits and e-mail addresses.",
+      "minDate": "This date cannot be in the past.",
+      "between": "The number of this field should be more than {{ min }} and less than {{ max }}",
+      "game": {
+        "gameName": {
+          "minLength": "Name of the game should be at least {{ $v.game.gameName.$params.minLength.min }} symbols long."
+        },
+        "playersLimit": {
+          "between": "The number of players limit should be in range from {{ $v.game.playersLimit.$params.between.min }} to {{ $v.game.playersLimit.$params.between.max }}."
+        }
+      }
     }
   },
   "error": {

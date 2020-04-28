@@ -119,7 +119,17 @@
       "maxbytes": "Це поле не може бути більше ніж {{max}} байтов.",
       "pattern": "Це поле повинно слідувати моделі {{pattern}}.",
       "number": "Це поле повинно бути числом.",
-      "datetimelocal": "Це поле повинно бути 'дата і час'."
+      "datetimelocal": "Це поле повинно бути 'дата і час'.",
+      "minDate": "Дата гри не може бути в минулому.",
+      "between": "Це поле повинно бути від {{ min }} до {{ max }}.",
+      "game": {
+        "gameName": {
+          "minLength": "Ім'я гри повинно бути хоча б {{ $v.game.gameName.$params.minLength.min }} символів в довжину."
+        },
+        "playersLimit": {
+          "between": "Обмеження кількості гравців повинно бути в діапазоні від {{ $v.game.playersLimit.$params.between.min }} до {{ $v.game.playersLimit.$params.between.max }}."
+        }
+      }
     }
   },
   "error": {
