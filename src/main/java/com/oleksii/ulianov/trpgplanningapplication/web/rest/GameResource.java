@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing {@link com.oleksii.ulianov.trpgplanningapplication.domain.Game}.
@@ -88,6 +91,17 @@ public class GameResource {
     public List<Game> getAllGames(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Games");
         return gameService.findAll();
+    }
+
+    /**
+     * {@code GET /games/grouped} : get all the games grouped by days.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and he map of the date, games in the body.
+     */
+    @GetMapping("/games/grouped")
+    public Set<Map.Entry<Instant, Set<Game>>> getAllGamesGroupedByDays() {
+        log.debug("REST request to get all Games grouped by days");
+        return gameService.findAllGamesGroupedByDays().entrySet();
     }
 
     /**
