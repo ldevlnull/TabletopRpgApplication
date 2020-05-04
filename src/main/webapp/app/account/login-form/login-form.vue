@@ -13,7 +13,7 @@
                         </b-form-input>
                     </b-form-group>
                     <b-form-group v-bind:label="$t('login.form.password')" label-for="password">
-                        <b-form-input id="password" type="password" name="password" v-model.trim="name" v-bind:placeholder="$t('login.form[\'password.placeholder\']')" v-model="password">
+                        <b-form-input id="password" type="password" name="password" v-model.trim="name" v-bind:placeholder="$t('login.form[\'password.placeholder\']')" v-model="password" current-password>
                         </b-form-input>
                     </b-form-group>
                     <b-form-checkbox id="rememberMe" name="rememberMe" v-model="rememberMe" checked >

@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -94,11 +93,14 @@ public class GameServiceImpl implements GameService {
     public Map<Instant, Set<Game>> findAllGamesGroupedByDays() {
         log.debug("Request to get all Games grouped by dates.");
         Map<Instant, Set<Game>> gamesByDays = new TreeMap<>(INSTANT_DAY_COMPARATOR);
-        gameRepository.findAll(Sort.by(Sort.Direction.ASC, "playDate")).forEach(game -> {
-            if (!gamesByDays.containsKey(game.getPlayDate()))
-                gamesByDays.put(game.getPlayDate(), new LinkedHashSet<>());
-            gamesByDays.get(game.getPlayDate()).add(game);
-        });
+        gameRepository.findAllWithEagerRelationships()
+            .stream()
+            .sorted(Comparator.comparing(Game::getPlayDate))
+            .forEach(game -> {
+                if (!gamesByDays.containsKey(game.getPlayDate()))
+                    gamesByDays.put(game.getPlayDate(), new LinkedHashSet<>());
+                gamesByDays.get(game.getPlayDate()).add(game);
+            });
         return gamesByDays;
     }
 }

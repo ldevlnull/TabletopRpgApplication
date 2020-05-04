@@ -4,9 +4,9 @@
             <b-navbar-toggle right class="jh-navbar-toggler d-lg-none float-right" href="javascript:void(0);"  data-toggle="collapse" target="header-tabs" aria-expanded="false" aria-label="Toggle navigation">
                 <font-awesome-icon icon="bars" />
             </b-navbar-toggle>
-            <b-navbar-brand class="logo float-left" b-link to="/">
+            <b-navbar-brand class="logo float-left" style="margin-right: 0" b-link to="/">
                 <span class="logo-img"></span>
-                <span v-text="$t('global.title')" class="navbar-title">TrpgPlanningApplication</span> <span class="navbar-version">{{version}}</span>
+                <span v-text="$t('global.title')" class="navbar-title">TrpgPlanningApplication</span> <!--<span class="navbar-version">{{version}}</span>-->
             </b-navbar-brand>
         </div>
         <b-collapse is-nav id="header-tabs">
