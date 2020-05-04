@@ -1,9 +1,8 @@
-import { Component, Vue, Inject } from 'vue-property-decorator';
+import { Component, Inject, Vue } from 'vue-property-decorator';
 
-import { numeric, required, minLength, maxLength, minValue, maxValue } from 'vuelidate/lib/validators';
+import { between, minLength, required } from 'vuelidate/lib/validators';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
-import parseISO from 'date-fns/parseISO';
 import { DATE_TIME_LONG_FORMAT } from '@/shared/date/filters';
 
 import GameSystemService from '../game-system/game-system.service';
@@ -16,18 +15,30 @@ import CharacterService from '../character/character.service';
 import { ICharacter } from '@/shared/model/character.model';
 
 import AlertService from '@/shared/alert/alert.service';
-import { IGame, Game } from '@/shared/model/game.model';
+import { Game, GameStatus, IGame } from '@/shared/model/game.model';
 import GameService from './game.service';
+import moment from 'moment';
+import { helpers } from 'vuelidate/lib/validators';
+
+const currentDate = moment(new Date()).startOf('day');
+const minDate = helpers.withParams({ type: 'minDate', minDate: currentDate.format('DD.MM.YYYY') }, value =>
+  moment(value, 'DD.MM.YYYY', true).isSameOrAfter(currentDate)
+);
 
 const validations: any = {
   game: {
     gameName: {
-      required
+      required,
+      minLength: minLength(3)
     },
     playDate: {
-      required
+      required,
+      minDate: minDate
     },
-    playersLimit: {},
+    playersLimit: {
+      required,
+      between: between(2, 64)
+    },
     pictureURL: {},
     description: {},
     status: {
@@ -67,6 +78,7 @@ export default class GameUpdate extends Vue {
   }
 
   created(): void {
+    this.game.status = GameStatus.PENDING;
     this.game.tags = [];
     this.game.characters = [];
   }
@@ -157,5 +169,9 @@ export default class GameUpdate extends Vue {
       }
     }
     return option;
+  }
+
+  public isFutureDate(): boolean {
+    return this.game.playDate > new Date();
   }
 }

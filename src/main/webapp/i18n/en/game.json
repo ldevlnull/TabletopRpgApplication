@@ -24,7 +24,8 @@
       "status": "Status",
       "gameSystem": "Game System",
       "tags": "Tags",
-      "characters": "Characters"
+      "characters": "Characters",
+      "venue": "Venue"
     }
   }
 }

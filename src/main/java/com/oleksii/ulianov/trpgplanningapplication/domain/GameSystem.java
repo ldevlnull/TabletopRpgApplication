@@ -30,6 +30,9 @@ public class GameSystem implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "picture_url")
+    private String pictureURL;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -64,6 +67,19 @@ public class GameSystem implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getPictureURL() {
+        return pictureURL;
+    }
+
+    public GameSystem pictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
+        return this;
+    }
+
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -88,6 +104,7 @@ public class GameSystem implements Serializable {
             "id=" + getId() +
             ", gameSystemName='" + getGameSystemName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", pictureURL='" + getPictureURL() + "'" +
             "}";
     }
 }

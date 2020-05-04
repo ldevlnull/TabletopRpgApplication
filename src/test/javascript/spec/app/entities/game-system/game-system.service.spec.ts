@@ -30,7 +30,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new GameSystemService();
 
-      elemDefault = new GameSystem(0, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new GameSystem(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -83,7 +83,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             gameSystemName: 'BBBBBB',
-            description: 'BBBBBB'
+            description: 'BBBBBB',
+            pictureURL: 'BBBBBB'
           },
           elemDefault
         );
@@ -111,7 +112,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             gameSystemName: 'BBBBBB',
-            description: 'BBBBBB'
+            description: 'BBBBBB',
+            pictureURL: 'BBBBBB'
           },
           elemDefault
         );

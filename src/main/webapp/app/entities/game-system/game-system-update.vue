@@ -24,6 +24,11 @@
                         <input type="text" class="form-control" name="description" id="game-system-description"
                             :class="{'valid': !$v.gameSystem.description.$invalid, 'invalid': $v.gameSystem.description.$invalid }" v-model="$v.gameSystem.description.$model" />
                     </div>
+                    <div class="form-group">
+                        <label class="form-control-label" v-text="$t('trpgPlanningApplicationApp.gameSystem.pictureURL')" for="game-system-pictureURL">Picture URL</label>
+                        <input type="text" class="form-control" name="pictureURL" id="game-system-pictureURL"
+                            :class="{'valid': !$v.gameSystem.pictureURL.$invalid, 'invalid': $v.gameSystem.pictureURL.$invalid }" v-model="$v.gameSystem.pictureURL.$model" />
+                    </div>
                 </div>
                 <div>
                     <button type="button" id="cancel-save" class="btn btn-secondary" v-on:click="previousState()">

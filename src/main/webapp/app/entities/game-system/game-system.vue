@@ -27,6 +27,7 @@
                     <th><span v-text="$t('global.field.id')">ID</span></th>
                     <th><span v-text="$t('trpgPlanningApplicationApp.gameSystem.gameSystemName')">Game System Name</span></th>
                     <th><span v-text="$t('trpgPlanningApplicationApp.gameSystem.description')">Description</span></th>
+                    <th><span v-text="$t('trpgPlanningApplicationApp.gameSystem.pictureURL')">Picture URL</span></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -38,6 +39,7 @@
                     </td>
                     <td>{{gameSystem.gameSystemName}}</td>
                     <td>{{gameSystem.description}}</td>
+                    <td>{{gameSystem.pictureURL}}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <router-link :to="{name: 'GameSystemView', params: {gameSystemId: gameSystem.id}}" tag="button" class="btn btn-info btn-sm details">

@@ -12,15 +12,18 @@ export default class Game extends mixins(Vue2Filters.mixin, AlertMixin) {
   @Inject('gameService') private gameService: () => GameService;
   private removeId: number = null;
   public games: IGame[] = [];
+  public gamesByDays: Map<Date, IGame[]> = null;
 
   public isFetching = false;
 
   public mounted(): void {
-    this.retrieveAllGames();
+    // this.retrieveAllGames();
+    this.retrieveAllGamesByDays();
   }
 
   public clear(): void {
-    this.retrieveAllGames();
+    // this.retrieveAllGames();
+    this.retrieveAllGamesByDays();
   }
 
   public retrieveAllGames(): void {
@@ -32,6 +35,23 @@ export default class Game extends mixins(Vue2Filters.mixin, AlertMixin) {
         res => {
           this.games = res.data;
           this.isFetching = false;
+        },
+        err => {
+          this.isFetching = false;
+        }
+      );
+  }
+
+  public retrieveAllGamesByDays(): void {
+    this.isFetching = true;
+
+    this.gameService()
+      .retrieveGroupedByDays()
+      .then(
+        res => {
+          this.gamesByDays = res.data;
+          this.isFetching = false;
+          console.log(this.gamesByDays);
         },
         err => {
           this.isFetching = false;
@@ -55,7 +75,8 @@ export default class Game extends mixins(Vue2Filters.mixin, AlertMixin) {
         this.getAlertFromStore();
 
         this.removeId = null;
-        this.retrieveAllGames();
+        // this.retrieveAllGames();
+        this.retrieveAllGamesByDays();
         this.closeDialog();
       });
   }

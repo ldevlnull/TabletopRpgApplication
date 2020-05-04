@@ -11,7 +11,8 @@ const validations: any = {
     gameSystemName: {
       required
     },
-    description: {}
+    description: {},
+    pictureURL: {}
   }
 };
 

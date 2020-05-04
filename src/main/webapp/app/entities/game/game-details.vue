@@ -1,78 +1,50 @@
 <template>
     <div class="row justify-content-center">
         <div class="col-8">
-            <div v-if="game">
-                <h2 class="jh-entity-heading"><span v-text="$t('trpgPlanningApplicationApp.game.detail.title')">Game</span> {{game.id}}</h2>
-                <dl class="row jh-entity-details">
-                    <dt>
-                        <span v-text="$t('trpgPlanningApplicationApp.game.gameName')">Game Name</span>
-                    </dt>
-                    <dd>
-                        <span>{{game.gameName}}</span>
-                    </dd>
-                    <dt>
-                        <span v-text="$t('trpgPlanningApplicationApp.game.playDate')">Play Date</span>
-                    </dt>
-                    <dd>
-                        <span v-if="game.playDate">{{$d(Date.parse(game.playDate), 'long') }}</span>
-                    </dd>
-                    <dt>
-                        <span v-text="$t('trpgPlanningApplicationApp.game.playersLimit')">Players Limit</span>
-                    </dt>
-                    <dd>
-                        <span>{{game.playersLimit}}</span>
-                    </dd>
-                    <dt>
-                        <span v-text="$t('trpgPlanningApplicationApp.game.pictureURL')">Picture URL</span>
-                    </dt>
-                    <dd>
-                        <span>{{game.pictureURL}}</span>
-                    </dd>
-                    <dt>
-                        <span v-text="$t('trpgPlanningApplicationApp.game.description')">Description</span>
-                    </dt>
-                    <dd>
-                        <span>{{game.description}}</span>
-                    </dd>
-                    <dt>
-                        <span v-text="$t('trpgPlanningApplicationApp.game.status')">Status</span>
-                    </dt>
-                    <dd>
-                        <span v-text="$t('trpgPlanningApplicationApp.GameStatus.' + game.status)">{{game.status}}</span>
-                    </dd>
-                    <dt>
-                        <span v-text="$t('trpgPlanningApplicationApp.game.gameSystem')">Game System</span>
-                    </dt>
-                    <dd>
-                        <div v-if="game.gameSystem">
-                            <router-link :to="{name: 'GameSystemView', params: {gameSystemId: game.gameSystem.id}}">{{game.gameSystem.id}}</router-link>
+            <div v-if="game" id="game-root">
+                <div class="game-header">
+                    <div class="game-header-inner">
+                        <div class="game-header-left">
+                            <img class="game-image" :src="game.pictureURL" :title="game.gameName" alt>
                         </div>
-                    </dd>
-                    <dt>
-                        <span v-text="$t('trpgPlanningApplicationApp.game.tags')">Tags</span>
-                    </dt>
-                    <dd>
-                        <span v-for="(tags, i) in game.tags" :key="tags.id">{{i > 0 ? ', ' : ''}}
-                            <router-link :to="{name: 'GameTagView', params: {gameTagId: tags.id}}">{{tags.gameTagName}}</router-link>
-                        </span>
-                    </dd>
-                    <dt>
-                        <span v-text="$t('trpgPlanningApplicationApp.game.characters')">Characters</span>
-                    </dt>
-                    <dd>
-                        <span v-for="(characters, i) in game.characters" :key="characters.id">{{i > 0 ? ', ' : ''}}
-                            <router-link :to="{name: 'CharacterView', params: {characterId: characters.id}}">{{characters.characterName}}</router-link>
-                        </span>
-                    </dd>
-                </dl>
-                <button type="submit"
-                        v-on:click.prevent="previousState()"
-                        class="btn btn-info">
-                    <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span v-text="$t('entity.action.back')"> Back</span>
-                </button>
-                <router-link v-if="game.id" :to="{name: 'GameEdit', params: {gameId: game.id}}" tag="button" class="btn btn-primary">
-                    <font-awesome-icon icon="pencil-alt"></font-awesome-icon>&nbsp;<span v-text="$t('entity.action.edit')"> Edit</span>
-                </router-link>
+                        <div class="game-header-right">
+                            <div v-if="game.gameSystem" class="game-system">
+                                <span class="game-system-item">
+                                    <img class="game-system-image" :src="game.gameSystem.pictureURL" alt>
+                                    <span class="game-system-name">{{game.gameSystem.gameSystemName}}</span>
+                                </span>
+                            </div>
+                            <h1 class="game-title">{{game.gameName}}</h1>
+                            <div class="game-info">
+                                <div class="game-info-col game-info-venue">
+                                    <h4 class="game-info-title" v-text="$t('trpgPlanningApplicationApp.game.venue')">Venue</h4>
+                                    <p>TODO VENUE</p>
+                                </div>
+                                <div class="game-info-col game-info-date">
+                                    <h4 class="game-info-title" v-text="$t('trpgPlanningApplicationApp.game.playDate')">Play Date</h4>
+                                    <p>{{moment(game.playDate).format("DD MMMM YYYY, dddd HH:mm ")}}</p>
+                                </div>
+                            </div>
+                            <div class="register-button-open game-register">
+                                <router-link v-if="game.id" :to="{name: 'GameEdit', params: {gameId: game.id}}" tag="button" class="btn btn-primary">
+                                    <span>TODO: REGISTER</span>
+                                </router-link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-body">
+                    <div class="game-content">
+                        <div class="game-text">{{game.description}}</div>
+                        <div class="game-network">
+                            <div class="game-sidebar">
+                                <!--                                <router-link v-if="game.id" :to="{name: 'GameEdit', params: {gameId: game.id}}" tag="button" class="btn btn-primary">-->
+                                <!--                                    <span>TODO: REGISTER</span>-->
+                                <!--                                </router-link>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -80,3 +52,165 @@
 
 <script lang="ts" src="./game-details.component.ts">
 </script>
+
+<style>
+    #game-root {
+        font-family: "Open Sans", Arial, sans-serif;
+        font-size: 14px;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        color: #535353;
+        background: #fff;
+        display: block;
+        line-height: 1;
+        min-height: 100%;
+        box-sizing: border-box;
+    }
+
+    .game-header {
+        padding-top: 50px;
+        position: relative;
+    }
+
+    .game-header-inner {
+        padding: 0 8%;
+        position: relative;
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+
+    .game-header-left {
+        float: left;
+        width: 35%;
+    }
+
+    .game-image {
+        max-width: 100%;
+        vertical-align: bottom;
+        border: 0;
+    }
+
+    .game-header-right {
+        margin-bottom: 120px;
+        position: relative;
+        padding-left: 40%;
+    }
+
+    .game-system {
+        color: #989898;
+        margin-bottom: 10px;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+    .game-system-item {
+        margin-right: 10px;
+    }
+
+    .game-system-image {
+        width: 32px;
+        height: 16px;
+        max-width: 100%;
+        vertical-align: bottom;
+        border: 0;
+    }
+
+    .game-system-name {
+        padding-left: 4px;
+    }
+
+    .game-title {
+        color: #2d282c;
+        font-size: 34px;
+        line-height: 1.1;
+        margin-bottom: .7em;
+    }
+
+    .game-info {
+        padding-bottom: 40px;
+    }
+
+    .game-info-col {
+        display: inline-block;
+        vertical-align: top;
+        font-size: 14px;
+    }
+
+    .game-info-venue {
+        width: 57%;
+        padding-right: 15px;
+    }
+
+    .game-info-date {
+        width: 42%;
+    }
+
+    .game-info-title {
+        color: #989898;
+        margin-bottom: 10px;
+    }
+
+    .game-body {
+        padding: 0 8%;
+        position: relative;
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+
+    .game-content {
+        float: right;
+        width: 60%;
+        margin-bottom: 70px;
+    }
+
+    .game-text {
+        margin-bottom: 35px;
+        font-size: 16px;
+        line-height: 1.7;
+        color: #2e282c;
+    }
+
+    .game-network {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    @media screen and (max-width: 760px) {
+        .game-header-inner {
+            padding: 0;
+        }
+
+        .game-header-left {
+            float: none;
+            width: auto;
+        }
+
+        .game-header-right {
+            padding-left: 0;
+            margin: 5% 0;
+        }
+
+        .game-info-date {
+            width: auto;
+        }
+
+        .game-info-title {
+            width: auto;
+        }
+
+        .game-body {
+            padding: 0;
+        }
+
+        .game-content {
+            float: none;
+            width: auto;
+        }
+
+        .container-fluid {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+</style>

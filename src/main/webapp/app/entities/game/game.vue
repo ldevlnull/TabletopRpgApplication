@@ -4,90 +4,59 @@
             <span v-text="$t('trpgPlanningApplicationApp.game.home.title')" id="game-heading">Games</span>
             <router-link :to="{name: 'GameCreate'}" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-game">
                 <font-awesome-icon icon="plus"></font-awesome-icon>
-                <span  v-text="$t('trpgPlanningApplicationApp.game.home.createLabel')">
+                <span v-text="$t('trpgPlanningApplicationApp.game.home.createLabel')">
                     Create a new Game
                 </span>
             </router-link>
         </h2>
         <b-alert :show="dismissCountDown"
-            dismissible
-            :variant="alertType"
-            @dismissed="dismissCountDown=0"
-            @dismiss-count-down="countDownChanged">
+                 dismissible
+                 :variant="alertType"
+                 @dismissed="dismissCountDown=0"
+                 @dismiss-count-down="countDownChanged">
             {{alertMessage}}
         </b-alert>
         <br/>
-        <div class="alert alert-warning" v-if="!isFetching && games && games.length === 0">
+        <div class="alert alert-warning" v-if="!isFetching && gamesByDays && gamesByDays.length === 0">
             <span v-text="$t('trpgPlanningApplicationApp.game.home.notFound')">No games found</span>
         </div>
-        <div class="table-responsive" v-if="games && games.length > 0">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('trpgPlanningApplicationApp.game.gameName')">Game Name</span></th>
-                    <th><span v-text="$t('trpgPlanningApplicationApp.game.playDate')">Play Date</span></th>
-                    <th><span v-text="$t('trpgPlanningApplicationApp.game.playersLimit')">Players Limit</span></th>
-                    <th><span v-text="$t('trpgPlanningApplicationApp.game.pictureURL')">Picture URL</span></th>
-                    <th><span v-text="$t('trpgPlanningApplicationApp.game.description')">Description</span></th>
-                    <th><span v-text="$t('trpgPlanningApplicationApp.game.status')">Status</span></th>
-                    <th><span v-text="$t('trpgPlanningApplicationApp.game.gameSystem')">Game System</span></th>
-                    <th><span v-text="$t('trpgPlanningApplicationApp.game.tags')">Tags</span></th>
-                    <th><span v-text="$t('trpgPlanningApplicationApp.game.characters')">Characters</span></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="game in games"
-                    :key="game.id">
-                    <td>
-                        <router-link :to="{name: 'GameView', params: {gameId: game.id}}">{{game.id}}</router-link>
-                    </td>
-                    <td>{{game.gameName}}</td>
-                    <td v-if="game.playDate"> {{$d(Date.parse(game.playDate), 'short') }}</td>
-                    <td>{{game.playersLimit}}</td>
-                    <td>{{game.pictureURL}}</td>
-                    <td>{{game.description}}</td>
-                    <td v-text="$t('trpgPlanningApplicationApp.GameStatus.' + game.status)">{{game.status}}</td>
-                    <td>
-                        <div v-if="game.gameSystem">
-                            <router-link :to="{name: 'GameSystemView', params: {gameSystemId: game.gameSystem.id}}">{{game.gameSystem.id}}</router-link>
-                        </div>
-                    </td>
-                    <td>
-                        <span v-for="(tags, i) in game.tags" :key="tags.id">{{i > 0 ? ', ' : ''}}
-                            <router-link class="form-control-static" :to="{name: 'GameTagView', params: {gameTagId: tags.id}}">{{tags.gameTagName}}</router-link>
-                        </span>
-                    </td>
-                    <td>
-                        <span v-for="(characters, i) in game.characters" :key="characters.id">{{i > 0 ? ', ' : ''}}
-                            <router-link class="form-control-static" :to="{name: 'CharacterView', params: {characterId: characters.id}}">{{characters.characterName}}</router-link>
-                        </span>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <router-link :to="{name: 'GameView', params: {gameId: game.id}}" tag="button" class="btn btn-info btn-sm details">
-                                <font-awesome-icon icon="eye"></font-awesome-icon>
-                                <span class="d-none d-md-inline" v-text="$t('entity.action.view')">View</span>
+        <div>
+            <div class="games">
+                <div v-for="dayGames in gamesByDays">
+                    <div class="popover-header">{{moment(Object.getOwnPropertyNames(dayGames)[0]).format("dddd, DD MMMM YYYY")}}</div>
+                    <div class="game-view-content" v-for="game in dayGames[Object.getOwnPropertyNames(dayGames)[0]]" :key="game.id">
+                        <div class="game block">
+                            <router-link :to="{name: 'GameView', params: {gameId: game.id}}">
+                                <b-card
+                                    overlay
+                                    :title="moment(game.playDate).format('HH:mm')"
+                                    text-variant="white"
+                                    :img-src="game.pictureURL"
+                                    style="max-width: 300px;"
+                                    img-height="400px"
+                                    class="pic img-responsive"
+                                    img-alt="Game Picture"
+                                    body-class="top align-text-top"
+                                >
+                                    <div class="text-right top-right">
+                                        <b-card-img style="max-width: 64px;" height="32px" :alt="game.gameSystem.gameSystemName" :src="game.gameSystem.pictureURL"></b-card-img>
+                                    </div>
+                                    <div class="text-center text-bottom">
+                                        <div v-for="tag in game.tags" :key="tag.id">
+                                            <router-link class="text-white text-stroke" :to="{name: 'GameTagView', params: {gameTagId: tag.id}}">
+                                                {{tag.gameTagName}}
+                                            </router-link>
+                                        </div>
+                                    </div>
+                                </b-card>
+                                <div class="text-center text">{{game.gameName}}</div>
                             </router-link>
-                            <router-link :to="{name: 'GameEdit', params: {gameId: game.id}}"  tag="button" class="btn btn-primary btn-sm edit">
-                                <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
-                                <span class="d-none d-md-inline" v-text="$t('entity.action.edit')">Edit</span>
-                            </router-link>
-                            <b-button v-on:click="prepareRemove(game)"
-                                   variant="danger"
-                                   class="btn btn-sm"
-                                   v-b-modal.removeEntity>
-                                <font-awesome-icon icon="times"></font-awesome-icon>
-                                <span class="d-none d-md-inline" v-text="$t('entity.action.delete')">Delete</span>
-                            </b-button>
                         </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                    </div>
+                </div>
+            </div>
         </div>
-        <b-modal ref="removeEntity" id="removeEntity" >
+        <b-modal ref="removeEntity" id="removeEntity">
             <span slot="modal-title"><span id="trpgPlanningApplicationApp.game.delete.question" v-text="$t('entity.delete.title')">Confirm delete operation</span></span>
             <div class="modal-body">
                 <p id="jhi-delete-game-heading" v-text="$t('trpgPlanningApplicationApp.game.delete.question', {'id': removeId})">Are you sure you want to delete this Game?</p>
@@ -102,3 +71,23 @@
 
 <script lang="ts" src="./game.component.ts">
 </script>
+
+<style>
+    .game-view-content {
+        display: inline-flex;
+        flex-direction: row;
+    }
+
+    .game {
+        margin: 1em;
+    }
+
+    .text-stroke {
+        color: white;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    }
+
+    .text-bottom {
+        vertical-align: text-bottom;
+    }
+</style>

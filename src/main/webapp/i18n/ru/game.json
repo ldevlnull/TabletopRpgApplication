@@ -24,7 +24,8 @@
       "status": "Статус",
       "gameSystem": "Система игры",
       "tags": "Тэги",
-      "characters": "Игроки"
+      "characters": "Игроки",
+      "venue": "Место игры"
     }
   }
 }

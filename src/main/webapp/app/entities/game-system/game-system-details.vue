@@ -16,6 +16,12 @@
                     <dd>
                         <span>{{gameSystem.description}}</span>
                     </dd>
+                    <dt>
+                        <span v-text="$t('trpgPlanningApplicationApp.gameSystem.pictureURL')">Picture URL</span>
+                    </dt>
+                    <dd>
+                        <span>{{gameSystem.pictureURL}}</span>
+                    </dd>
                 </dl>
                 <button type="submit"
                         v-on:click.prevent="previousState()"

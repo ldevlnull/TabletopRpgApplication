@@ -17,7 +17,8 @@
         "title": "Game System"
       },
       "gameSystemName": "Game System Name",
-      "description": "Description"
+      "description": "Description",
+      "pictureURL": "Picture URL"
     }
   }
 }
