@@ -5,6 +5,7 @@ import com.oleksii.ulianov.trpgplanningapplication.domain.Character;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,6 +29,13 @@ public interface CharacterService {
      */
     Page<Character> findAll(Pageable pageable);
 
+    /**
+     * Get all the characters of the given user.
+     *
+     * @param userId id of the user
+     * @return the list of characters
+     */
+    List<Character> findAllByUserId(long userId);
     /**
      * Get the "id" character.
      *

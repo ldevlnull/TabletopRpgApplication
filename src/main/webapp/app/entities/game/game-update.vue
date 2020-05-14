@@ -49,6 +49,9 @@
                         </small>
                     </div>
                     <div class="form-group">
+                        <div v-if="$v.game.pictureURL">
+                            <img :src="$v.game.pictureURL" alt>
+                        </div>
                         <label class="form-control-label" v-text="$t('trpgPlanningApplicationApp.game.pictureURL')" for="game-pictureURL">Picture URL</label>
                         <input type="url" class="form-control" name="pictureURL" id="game-pictureURL"
                                :class="{'valid': !$v.game.pictureURL.$invalid, 'invalid': $v.game.pictureURL.$invalid }" v-model="$v.game.pictureURL.$model"/>

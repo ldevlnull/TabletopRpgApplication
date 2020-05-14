@@ -11,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Character}.
@@ -75,5 +77,13 @@ public class CharacterServiceImpl implements CharacterService {
     public void delete(Long id) {
         log.debug("Request to delete Character : {}", id);
         characterRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Character> findAllByUserId(long userId) {
+        log.debug("Request to get all Characters by userId = " + userId);
+        return characterRepository.findAll().stream()
+            .filter(character -> character.getUser().getId() == userId)
+            .collect(Collectors.toList());
     }
 }

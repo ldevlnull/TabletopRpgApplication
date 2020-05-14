@@ -23,12 +23,14 @@ export default class Character extends mixins(Vue2Filters.mixin, AlertMixin) {
   public isFetching = false;
 
   public mounted(): void {
-    this.retrieveAllCharacters();
+    // this.retrieveAllCharacters();
+    this.retrieveAllCharactersOfCurrentUser();
   }
 
   public clear(): void {
     this.page = 1;
-    this.retrieveAllCharacters();
+    // this.retrieveAllCharacters();
+    this.retrieveAllCharactersOfCurrentUser();
   }
 
   public retrieveAllCharacters(): void {
@@ -54,6 +56,22 @@ export default class Character extends mixins(Vue2Filters.mixin, AlertMixin) {
       );
   }
 
+  public retrieveAllCharactersOfCurrentUser(): void {
+    this.isFetching = true;
+
+    this.characterService()
+      .retrieveCharactersByUserId(this.$store.getters.account.id)
+      .then(
+        res => {
+          this.characters = res.data;
+          this.isFetching = false;
+        },
+        err => {
+          this.isFetching = false;
+        }
+      );
+  }
+
   public prepareRemove(instance: ICharacter): void {
     this.removeId = instance.id;
     if (<any>this.$refs.removeEntity) {
@@ -70,7 +88,8 @@ export default class Character extends mixins(Vue2Filters.mixin, AlertMixin) {
         this.getAlertFromStore();
 
         this.removeId = null;
-        this.retrieveAllCharacters();
+        // this.retrieveAllCharacters();
+        this.retrieveAllCharactersOfCurrentUser();
         this.closeDialog();
       });
   }
@@ -91,7 +110,8 @@ export default class Character extends mixins(Vue2Filters.mixin, AlertMixin) {
   }
 
   public transition(): void {
-    this.retrieveAllCharacters();
+    // this.retrieveAllCharacters();
+    this.retrieveAllCharactersOfCurrentUser();
   }
 
   public changeOrder(propOrder): void {

@@ -41,11 +41,11 @@
                     <td>{{character.characterName}}</td>
                     <td>{{character.isAlive}}</td>
                     <td>
-                        {{character.user ? character.user.id : ''}}
+                        {{character.user ? character.user.login : ''}}
                     </td>
                     <td>
                         <div v-if="character.gameSystem">
-                            <router-link :to="{name: 'GameSystemView', params: {gameSystemId: character.gameSystem.id}}">{{character.gameSystem.id}}</router-link>
+                            <router-link :to="{name: 'GameSystemView', params: {gameSystemId: character.gameSystem.id}}">{{character.gameSystem.gameSystemName}}</router-link>
                         </div>
                     </td>
                     <td class="text-right">

@@ -33,6 +33,19 @@ export default class CharacterService {
     });
   }
 
+  public retrieveCharactersByUserId(userId?: number): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .get(baseApiUrl + `/user/${userId}`)
+        .then(function(res) {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
   public delete(id: number): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
