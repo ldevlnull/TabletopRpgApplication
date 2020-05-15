@@ -26,9 +26,27 @@
                                 </div>
                             </div>
                             <div class="register-button-open game-register">
-                                <router-link v-if="game.id" :to="{name: 'GameEdit', params: {gameId: game.id}}" tag="button" class="btn btn-primary">
-                                    <span>TODO: REGISTER</span>
-                                </router-link>
+<!--                                <router-link v-if="game.id" :to="{name: 'GameEdit', params: {gameId: game.id}}" tag="button" class="btn btn-primary">-->
+<!--                                    <span>Edit game</span>-->
+<!--                                </router-link>-->
+                                <div class="container-fluid">
+                                    <div class="btn btn-primary" v-on:click="loadAndShowUserCharacters()">
+                                        Join Game <!-- todo: add localization -->
+                                    </div>
+                                    <div v-show="this.showCharacters">
+                                        <table v-for="userCharacter in userCharacters">
+                                            <tr>
+                                                <td>{{userCharacter.characterName}}</td> <td class="btn btn-secondary" @click="joinWithCharacter(userCharacter)">Join</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="game.characters && game.characters.length > 0" v-for="gameCharacter in game.characters">
+                                <span>{{gameCharacter.characterName}}</span> <span>({{gameCharacter.user.login}})</span>
+                            </div>
+                            <div v-else>
+                                No characters are registert to this game yet!
                             </div>
                         </div>
                     </div>
@@ -38,9 +56,6 @@
                         <div class="game-text">{{game.description}}</div>
                         <div class="game-network">
                             <div class="game-sidebar">
-                                <!--                                <router-link v-if="game.id" :to="{name: 'GameEdit', params: {gameId: game.id}}" tag="button" class="btn btn-primary">-->
-                                <!--                                    <span>TODO: REGISTER</span>-->
-                                <!--                                </router-link>-->
                             </div>
                         </div>
                     </div>

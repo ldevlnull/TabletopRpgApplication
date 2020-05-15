@@ -6,6 +6,8 @@ import { IGame } from '@/shared/model/game.model';
 import AlertMixin from '@/shared/alert/alert.mixin';
 
 import GameService from './game.service';
+import CharacterService from '@/entities/character/character.service';
+import { ICharacter } from '@/shared/model/character.model';
 
 @Component
 export default class Game extends mixins(Vue2Filters.mixin, AlertMixin) {

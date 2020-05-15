@@ -11,7 +11,7 @@ public final class AuthoritiesConstants {
     public static final String ADMIN = "ROLE_ADMIN";
 
     /**
-     * {@code GAME_MASTER} and can promote (or demote) users to {@code GAME_MASTER}; create, edit or delete others characters and games; can deactivate or activate Users.
+     * {@code GAME_MASTER} and can grant (or deny) users {@code GAME_MASTER}; create, edit or delete others characters and games; can deactivate or activate Users.
      */
     public static final String MODERATOR = "ROLE_MODERATOR";
 

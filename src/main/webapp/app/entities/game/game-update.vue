@@ -59,7 +59,7 @@
                     <div class="form-group">
                         <label class="form-control-label" v-text="$t('trpgPlanningApplicationApp.game.description')" for="game-description">Description</label>
                         <textarea class="form-control" name="description" id="game-description"
-                                  :class="{'valid': !$v.game.description.$invalid, 'invalid': $v.game.description.$invalid }" v-model="$v.game.description.$model">
+                                  :class="{'valid': !$v.game.description.$invalid, 'invalid': $v.game.description.$invalid}" v-model="$v.game.description.$model">
                         </textarea>
                     </div>
                     <div class="form-group">

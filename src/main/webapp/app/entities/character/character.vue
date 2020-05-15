@@ -33,8 +33,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="character in characters"
-                    :key="character.id">
+                <tr v-for="character in characters" :key="character.id">
                     <td>
                         <router-link :to="{name: 'CharacterView', params: {characterId: character.id}}">{{character.id}}</router-link>
                     </td>
