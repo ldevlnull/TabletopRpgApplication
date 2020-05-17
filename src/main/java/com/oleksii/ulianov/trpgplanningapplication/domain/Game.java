@@ -40,10 +40,10 @@ public class Game implements Serializable {
     @Column(name = "players_limit")
     private Integer playersLimit;
 
-    @Column(name = "picture_url")
+    @Column(name = "picture_url", length = 2083)
     private String pictureURL;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 8192)
     private String description;
 
     @NotNull

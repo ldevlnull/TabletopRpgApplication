@@ -1,5 +1,7 @@
 package com.oleksii.ulianov.trpgplanningapplication.service.impl;
 
+import com.oleksii.ulianov.trpgplanningapplication.domain.Game;
+import com.oleksii.ulianov.trpgplanningapplication.repository.GameRepository;
 import com.oleksii.ulianov.trpgplanningapplication.service.CharacterService;
 import com.oleksii.ulianov.trpgplanningapplication.domain.Character;
 import com.oleksii.ulianov.trpgplanningapplication.repository.CharacterRepository;
@@ -25,9 +27,11 @@ public class CharacterServiceImpl implements CharacterService {
     private final Logger log = LoggerFactory.getLogger(CharacterServiceImpl.class);
 
     private final CharacterRepository characterRepository;
+    private final GameRepository gameRepository;
 
-    public CharacterServiceImpl(CharacterRepository characterRepository) {
+    public CharacterServiceImpl(CharacterRepository characterRepository, GameRepository gameRepository) {
         this.characterRepository = characterRepository;
+        this.gameRepository = gameRepository;
     }
 
     /**
@@ -76,6 +80,15 @@ public class CharacterServiceImpl implements CharacterService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Character : {}", id);
+        log.debug("Removing character from all games first");
+
+        gameRepository.saveAll(
+            gameRepository.findAllWithEagerRelationships().stream()
+                .filter(game -> game.getCharacters().stream().anyMatch(character -> character.getId().equals(id)))
+                .peek(game -> game.getCharacters().removeIf(character -> character.getId().equals(id)))
+                .collect(Collectors.toList())
+        );
+
         characterRepository.deleteById(id);
     }
 

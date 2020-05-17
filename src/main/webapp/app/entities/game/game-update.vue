@@ -61,6 +61,9 @@
                         <textarea class="form-control" name="description" id="game-description"
                                   :class="{'valid': !$v.game.description.$invalid, 'invalid': $v.game.description.$invalid}" v-model="$v.game.description.$model">
                         </textarea>
+                        <small class="form-text text-danger" v-if="!$v.game.description.maxLength">
+                            Max description length is {{ $v.game.description.$params.maxLength.max }}.
+                        </small>
                     </div>
                     <div class="form-group">
                         <label class="form-control-label" v-text="$t('trpgPlanningApplicationApp.game.gameSystem')" for="game-gameSystem">Game System</label>

@@ -25,28 +25,37 @@
                                     <p>{{moment(game.playDate).format("DD MMMM YYYY, dddd HH:mm ")}}</p>
                                 </div>
                             </div>
-                            <div class="register-button-open game-register">
-<!--                                <router-link v-if="game.id" :to="{name: 'GameEdit', params: {gameId: game.id}}" tag="button" class="btn btn-primary">-->
-<!--                                    <span>Edit game</span>-->
-<!--                                </router-link>-->
-                                <div class="container-fluid">
-                                    <div class="btn btn-primary" v-on:click="loadAndShowUserCharacters()">
-                                        Join Game <!-- todo: add localization -->
-                                    </div>
-                                    <div v-show="this.showCharacters">
-                                        <table v-for="userCharacter in userCharacters">
-                                            <tr>
-                                                <td>{{userCharacter.characterName}}</td> <td class="btn btn-secondary" @click="joinWithCharacter(userCharacter)">Join</td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                            <div class="registered-characters-list">
+                                <table v-if="game.characters && game.characters.length > 0" class="table table-dark">
+                                    <tr v-for="gameCharacter in game.characters">
+                                        <td style="width: 33%">{{gameCharacter.characterName}}</td>
+                                        <td style="width: 33%">({{gameCharacter.user.login}})</td>
+                                        <td v-show="isCharacterOfUser(gameCharacter)" style="width: 33%"><span class="btn btn-secondary" @click="leaveWithCharacter()">Leave</span></td>
+                                    </tr>
+                                </table>
+                                <div v-else>
+                                    No characters are registered to this game yet!
                                 </div>
                             </div>
-                            <div v-if="game.characters && game.characters.length > 0" v-for="gameCharacter in game.characters">
-                                <span>{{gameCharacter.characterName}}</span> <span>({{gameCharacter.user.login}})</span>
-                            </div>
-                            <div v-else>
-                                No characters are registert to this game yet!
+                            <div class="register-button-open game-register">
+                                <!--                                <router-link v-if="game.id" :to="{name: 'GameEdit', params: {gameId: game.id}}" tag="button" class="btn btn-primary">-->
+                                <!--                                    <span>Edit game</span>-->
+                                <!--                                </router-link>-->
+                                <div class="container-fluid">
+                                    <div class="btn btn-primary" v-on:click="showUserCharacterWithFetch()">
+                                        Join Game <!-- todo: add localization -->
+                                    </div>
+                                    <span class="btn btn-secondary" v-show="this.showCharacters" @click="hideUserCharacters()">Hide</span>
+                                    <div v-show="this.showCharacters">
+                                        <table v-show="!isUserRegistered()" class="table table-light">
+                                            <tr v-for="userCharacter in userCharacters" >
+                                                <td style="width: 50%">{{userCharacter.characterName}}</td>
+                                                <td style="width: 50%"><span class="btn btn-secondary" @click="joinWithCharacter(userCharacter)">Join</span></td>
+                                            </tr>
+                                        </table>
+                                        <div v-show="isUserRegistered()">You are already registered to this game!</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -189,6 +198,17 @@
     .game-network {
         margin-bottom: 10px;
         text-align: center;
+    }
+    .register-button-open > .container-fluid > .btn {
+        margin: 2em 0;
+    }
+
+    .registered-characters-list {
+        margin: 2em 0;
+    }
+
+    .registered-characters-list > .table {
+        margin: 0;
     }
 
     @media screen and (max-width: 760px) {

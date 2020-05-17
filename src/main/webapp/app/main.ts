@@ -31,9 +31,11 @@ import GameTagService from '@/entities/game-tag/game-tag.service';
 import CharacterService from '@/entities/character/character.service';
 import GameService from '@/entities/game/game.service';
 import moment from 'moment';
+import $ from 'jquery';
 import BootstrapVue from 'bootstrap-vue';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 Vue.prototype.moment = moment;
+Vue.prototype.$ = $;
 
 moment.updateLocale('en', {
   months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']

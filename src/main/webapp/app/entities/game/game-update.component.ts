@@ -1,6 +1,6 @@
 import { Component, Inject, Vue } from 'vue-property-decorator';
 
-import { between, minLength, required } from 'vuelidate/lib/validators';
+import { between, maxLength, minLength, required } from 'vuelidate/lib/validators';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 import { DATE_TIME_LONG_FORMAT } from '@/shared/date/filters';
@@ -40,7 +40,9 @@ const validations: any = {
       between: between(2, 64)
     },
     pictureURL: {},
-    description: {},
+    description: {
+      maxLength: maxLength(8192)
+    },
     status: {
       required
     }

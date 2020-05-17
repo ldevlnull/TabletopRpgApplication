@@ -30,7 +30,7 @@ public class GameSystem implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "picture_url")
+    @Column(name = "picture_url", length = 2083)
     private String pictureURL;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

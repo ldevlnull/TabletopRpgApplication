@@ -41,7 +41,7 @@
                                     <div class="text-right top-right">
                                         <router-link :to="{name: 'GameSystemView', params: {gameSystemId: game.gameSystem.id}}">
                                             <b-card-img style="max-width: 64px;" height="32px" :alt="game.gameSystem.gameSystemName" :src="game.gameSystem.pictureURL"
-                                                        data-toggle="tooltip" data-placement="top" :title="game.gameSystem.description|game.gameSystem.gameSystemName"></b-card-img>
+                                                        data-toggle="tooltip" data-placement="top" :title="game.gameSystem.description"></b-card-img>
                                         </router-link>
                                     </div>
                                     <div class="text-center text-bottom">
