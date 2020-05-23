@@ -1,6 +1,6 @@
-import { Component, Vue, Inject } from 'vue-property-decorator';
+import { Component, Inject, Vue } from 'vue-property-decorator';
 
-import { IGame } from '@/shared/model/game.model';
+import { GameStatus, IGame } from '@/shared/model/game.model';
 import GameService from './game.service';
 import { ICharacter } from '@/shared/model/character.model';
 import CharacterService from '@/entities/character/character.service';
@@ -26,9 +26,7 @@ export default class GameDetails extends Vue {
   public retrieveGame(gameId) {
     this.gameService()
       .find(gameId)
-      .then(res => {
-        this.game = res;
-      });
+      .then(res => (this.game = res));
   }
 
   public previousState() {
@@ -39,9 +37,10 @@ export default class GameDetails extends Vue {
     if (!this.isUserAlreadyRegistered && this.userCharacters.length === 0) {
       this.characterService()
         .retrieveCharactersByUserId(this.getUserId())
-        .then(res => {
-          this.userCharacters = res.data.filter(character => character.isAlive && character.gameSystem.id === this.game.gameSystem.id);
-        })
+        .then(
+          res =>
+            (this.userCharacters = res.data.filter(character => character.isAlive && character.gameSystem.id === this.game.gameSystem.id))
+        )
         .catch(reason => console.log(reason));
     }
     this.showCharacters = true;
@@ -94,5 +93,55 @@ export default class GameDetails extends Vue {
 
   public isUserRegistered(): boolean {
     return this.isUserAlreadyRegistered;
+  }
+
+  // todo: move to game class
+  public getFreeSlotsCount(): number {
+    return this.game.playersLimit - this.game.characters.length;
+  }
+
+  public isUserGM(): boolean {
+    return this.game.user.id === this.getUserId();
+  }
+
+  public startGame() {
+    if (this.isGamePending()) {
+      this.game.status = GameStatus.IN_PROGRESS;
+      this.gameService()
+        .update(this.game)
+        .then(updated => (this.game = updated));
+    }
+  }
+
+  public endGame() {
+    if (this.isGameInProgress()) {
+      this.game.status = GameStatus.ENDED;
+      this.gameService()
+        .update(this.game)
+        .then(updated => (this.game = updated));
+    }
+  }
+
+  public cancelGame() {
+    this.game.status = GameStatus.CANCELLED;
+    this.gameService()
+      .update(this.game)
+      .then(updated => (this.game = updated));
+  }
+
+  public isGamePending(): boolean {
+    return this.game.status === GameStatus.PENDING;
+  }
+
+  public isGameInProgress(): boolean {
+    return this.game.status === GameStatus.IN_PROGRESS;
+  }
+
+  public isGameEnded(): boolean {
+    return this.game.status === GameStatus.ENDED;
+  }
+
+  public isGameCancelled(): boolean {
+    return this.game.status === GameStatus.CANCELLED;
   }
 }

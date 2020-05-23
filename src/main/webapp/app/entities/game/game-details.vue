@@ -15,6 +15,17 @@
                                 </span>
                             </div>
                             <h1 class="game-title">{{game.gameName}}</h1>
+                            <div class="gm-control-panel" v-if="isUserGM()">
+                                <!-- todo: localize -->
+                                <span v-show="isGamePending()" class="btn btn-primary" @click="startGame()">Start Game</span>
+                                <span v-show="isGameInProgress()" class="btn btn-primary" @click="endGame()">End Game</span>
+                                <span v-show="isGameEnded()" class="btn btn-success" disabled>Game Ended</span>
+                                <span v-show="isGameCancelled()" class="btn btn-danger" disabled="">Game Cancelled</span>
+                                <router-link v-if="game.id" :to="{name: 'GameEdit', params: {gameId: game.id}}" tag="button" class="btn btn-secondary">
+                                    <span>Edit game</span>
+                                </router-link>
+                                <span v-show="!isGameCancelled()" class="btn btn-danger" @click="cancelGame()">Cancel Game</span>
+                            </div>
                             <div class="game-info">
                                 <div class="game-info-col game-info-venue">
                                     <h4 class="game-info-title" v-text="$t('trpgPlanningApplicationApp.game.venue')">Venue</h4>
@@ -25,35 +36,62 @@
                                     <p>{{moment(game.playDate).format("DD MMMM YYYY, dddd HH:mm ")}}</p>
                                 </div>
                             </div>
+                            <div class="game-info">
+                                <div class="game-info-col game-info-gm">
+                                    <h4 class="game-info-title" v-text="$t('trpgPlanningApplicationApp.game.user')">Game Master</h4>
+                                    <p>{{game.user.login}}</p>
+                                </div>
+                                <div>
+                                    <h4 class="game-info-title" v-text="$t('trpgPlanningApplicationApp.game.status')">Game Status</h4>
+                                    <!-- todo: localize -->
+                                    <button v-show="isGamePending()" class="btn btn-secondary" disabled v-text="$t('trpgPlanningApplicationApp.GameStatus.PENDING')">Pending</button>
+                                    <button v-show="isGameInProgress()" class="btn btn-info" disabled v-text="$t('trpgPlanningApplicationApp.GameStatus.IN_PROGRESS')">In Progress</button>
+                                    <button v-show="isGameEnded()" class="btn btn-success" disabled v-text="$t('trpgPlanningApplicationApp.GameStatus.ENDED')">Ended</button>
+                                    <button v-show="isGameCancelled()" class="btn btn-danger" disabled v-text="$t('trpgPlanningApplicationApp.GameStatus.CANCELLED')">Cancelled</button>
+                                </div>
+                            </div>
                             <div class="registered-characters-list">
                                 <table v-if="game.characters && game.characters.length > 0" class="table table-dark">
-                                    <tr v-for="gameCharacter in game.characters">
+                                    <tr align="right">
+                                        <td colspan="3">Players: {{game.characters.length}}/{{game.playersLimit}}</td>
+                                    </tr>
+                                    <tr v-for="gameCharacter in game.characters" style="vertical-align: middle">
                                         <td style="width: 33%">{{gameCharacter.characterName}}</td>
                                         <td style="width: 33%">({{gameCharacter.user.login}})</td>
-                                        <td v-show="isCharacterOfUser(gameCharacter)" style="width: 33%"><span class="btn btn-secondary" @click="leaveWithCharacter()">Leave</span></td>
+                                        <td v-show="isGamePending() && isCharacterOfUser(gameCharacter)" style="width: 33%"><span class="btn btn-secondary" @click="leaveWithCharacter()">Leave</span>
+                                        </td>
                                     </tr>
                                 </table>
                                 <div v-else>
+                                    <!-- todo: localize -->
                                     No characters are registered to this game yet!
                                 </div>
                             </div>
                             <div class="register-button-open game-register">
-                                <!--                                <router-link v-if="game.id" :to="{name: 'GameEdit', params: {gameId: game.id}}" tag="button" class="btn btn-primary">-->
-                                <!--                                    <span>Edit game</span>-->
-                                <!--                                </router-link>-->
                                 <div class="container-fluid">
                                     <div class="btn btn-primary" v-on:click="showUserCharacterWithFetch()">
                                         Join Game <!-- todo: add localization -->
                                     </div>
                                     <span class="btn btn-secondary" v-show="this.showCharacters" @click="hideUserCharacters()">Hide</span>
                                     <div v-show="this.showCharacters">
-                                        <table v-show="!isUserRegistered()" class="table table-light">
-                                            <tr v-for="userCharacter in userCharacters" >
+                                        <table v-show="!isUserRegistered() && isGamePending()" class="table table-light">
+                                            <tr v-if="userCharacters.length === 0">
+                                                <td colspan="2">
+                                                    <!-- todo: localize -->
+                                                    <p class="warning">You have no characters that you can join with!</p>
+                                                    <p class="b-tooltip-warning">(Character must be alive, be of corresponding system and not be participation the not finished
+                                                        game)</p>
+                                                </td>
+                                            </tr>
+                                            <tr v-else v-for="userCharacter in userCharacters">
                                                 <td style="width: 50%">{{userCharacter.characterName}}</td>
                                                 <td style="width: 50%"><span class="btn btn-secondary" @click="joinWithCharacter(userCharacter)">Join</span></td>
                                             </tr>
                                         </table>
-                                        <div v-show="isUserRegistered()">You are already registered to this game!</div>
+                                        <!-- todo: localize -->
+                                        <div v-show="isUserRegistered()" class="alert alert-warning">You are already registered to this game!</div>
+                                        <div v-show="!isUserRegistered() && getFreeSlotsCount() === 0" class="alert alert-warning">No free slots!</div>
+                                        <div v-show="!isUserRegistered() && !isGamePending()" class="alert alert-warning">The game has been started!</div>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +192,9 @@
     .game-info {
         padding-bottom: 40px;
     }
-
+    .gm-control-panel {
+        margin-bottom: 20px;
+    }
     .game-info-col {
         display: inline-block;
         vertical-align: top;
@@ -199,6 +239,7 @@
         margin-bottom: 10px;
         text-align: center;
     }
+
     .register-button-open > .container-fluid > .btn {
         margin: 2em 0;
     }
@@ -226,11 +267,7 @@
             margin: 5% 0;
         }
 
-        .game-info-date {
-            width: auto;
-        }
-
-        .game-info-title {
+        .game-info-date, .game-info-title, .game-info-gm {
             width: auto;
         }
 

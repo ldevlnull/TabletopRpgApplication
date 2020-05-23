@@ -58,16 +58,19 @@ public class Game implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "game_tags",
-               joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "tags_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "tags_id", referencedColumnName = "id"))
     private Set<GameTag> tags = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "game_characters",
-               joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "characters_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "characters_id", referencedColumnName = "id"))
     private Set<Character> characters = new HashSet<>();
+
+    @ManyToOne
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -190,6 +193,14 @@ public class Game implements Serializable {
         return this;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
     public void setTags(Set<GameTag> gameTags) {
         this.tags = gameTags;
     }
@@ -246,6 +257,7 @@ public class Game implements Serializable {
             ", pictureURL='" + getPictureURL() + "'" +
             ", description='" + getDescription() + "'" +
             ", status='" + getStatus() + "'" +
+            ", user'" + getUser() + "'" +
             "}";
     }
 }

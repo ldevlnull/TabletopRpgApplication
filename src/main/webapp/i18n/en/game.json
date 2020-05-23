@@ -25,7 +25,8 @@
       "gameSystem": "Game System",
       "tags": "Tags",
       "characters": "Characters",
-      "venue": "Venue"
+      "venue": "Venue",
+      "user": "Game Master"
     }
   }
 }

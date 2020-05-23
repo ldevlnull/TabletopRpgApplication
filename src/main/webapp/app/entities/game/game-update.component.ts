@@ -19,6 +19,7 @@ import { Game, GameStatus, IGame } from '@/shared/model/game.model';
 import GameService from './game.service';
 import moment from 'moment';
 import { helpers } from 'vuelidate/lib/validators';
+import UserManagementService from '@/admin/user-management/user-management.service';
 
 const currentDate = moment(new Date()).startOf('day');
 const minDate = helpers.withParams({ type: 'minDate', minDate: currentDate.format('DD.MM.YYYY') }, value =>
@@ -66,6 +67,7 @@ export default class GameUpdate extends Vue {
   public gameTags: IGameTag[] = [];
 
   @Inject('characterService') private characterService: () => CharacterService;
+  @Inject('userManagementService') private userService: () => UserManagementService;
 
   public characters: ICharacter[] = [];
   public isSaving = false;
@@ -83,6 +85,9 @@ export default class GameUpdate extends Vue {
     this.game.status = GameStatus.PENDING;
     this.game.tags = [];
     this.game.characters = [];
+    this.userService()
+      .get(this.$store.getters.account.id)
+      .then(user => (this.game.user = user));
   }
 
   public save(): void {
