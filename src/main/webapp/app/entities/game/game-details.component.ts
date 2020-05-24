@@ -34,7 +34,7 @@ export default class GameDetails extends Vue {
   }
 
   public showUserCharacterWithFetch() {
-    if (!this.isUserAlreadyRegistered && this.userCharacters.length === 0) {
+    if (this.authenticated && !this.isUserAlreadyRegistered && this.userCharacters.length === 0) {
       this.characterService()
         .retrieveCharactersByUserId(this.getUserId())
         .then(
@@ -143,5 +143,9 @@ export default class GameDetails extends Vue {
 
   public isGameCancelled(): boolean {
     return this.game.status === GameStatus.CANCELLED;
+  }
+
+  public get authenticated(): boolean {
+    return this.$store.getters.authenticated;
   }
 }

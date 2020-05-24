@@ -15,7 +15,7 @@
                                 </span>
                             </div>
                             <h1 class="game-title">{{game.gameName}}</h1>
-                            <div class="gm-control-panel" v-if="isUserGM()">
+                            <div class="gm-control-panel" v-if="authenticated && isUserGM()">
                                 <!-- todo: localize -->
                                 <span v-show="isGamePending()" class="btn btn-primary" @click="startGame()">Start Game</span>
                                 <span v-show="isGameInProgress()" class="btn btn-primary" @click="endGame()">End Game</span>
@@ -29,7 +29,7 @@
                             <div class="game-info">
                                 <div class="game-info-col game-info-venue">
                                     <h4 class="game-info-title" v-text="$t('trpgPlanningApplicationApp.game.venue')">Venue</h4>
-                                    <p>TODO VENUE</p>
+                                    <p>{{game.venue}}</p>
                                 </div>
                                 <div class="game-info-col game-info-date">
                                     <h4 class="game-info-title" v-text="$t('trpgPlanningApplicationApp.game.playDate')">Play Date</h4>
@@ -41,11 +41,11 @@
                                     <h4 class="game-info-title" v-text="$t('trpgPlanningApplicationApp.game.user')">Game Master</h4>
                                     <p>{{game.user.login}}</p>
                                 </div>
-                                <div>
+                                <div class="game-info-col game-info-status">
                                     <h4 class="game-info-title" v-text="$t('trpgPlanningApplicationApp.game.status')">Game Status</h4>
                                     <!-- todo: localize -->
                                     <button v-show="isGamePending()" class="btn btn-secondary" disabled v-text="$t('trpgPlanningApplicationApp.GameStatus.PENDING')">Pending</button>
-                                    <button v-show="isGameInProgress()" class="btn btn-info" disabled v-text="$t('trpgPlanningApplicationApp.GameStatus.IN_PROGRESS')">In Progress</button>
+                                    <button v-show="isGameInProgress()" class="btn badge-info" disabled v-text="$t('trpgPlanningApplicationApp.GameStatus.IN_PROGRESS')">In Progress</button>
                                     <button v-show="isGameEnded()" class="btn btn-success" disabled v-text="$t('trpgPlanningApplicationApp.GameStatus.ENDED')">Ended</button>
                                     <button v-show="isGameCancelled()" class="btn btn-danger" disabled v-text="$t('trpgPlanningApplicationApp.GameStatus.CANCELLED')">Cancelled</button>
                                 </div>
@@ -58,11 +58,11 @@
                                     <tr v-for="gameCharacter in game.characters" style="vertical-align: middle">
                                         <td style="width: 33%">{{gameCharacter.characterName}}</td>
                                         <td style="width: 33%">({{gameCharacter.user.login}})</td>
-                                        <td v-show="isGamePending() && isCharacterOfUser(gameCharacter)" style="width: 33%"><span class="btn btn-secondary" @click="leaveWithCharacter()">Leave</span>
+                                        <td v-if="authenticated" v-show="isGamePending() && isCharacterOfUser(gameCharacter)" style="width: 33%"><span class="btn btn-secondary" @click="leaveWithCharacter()">Leave</span>
                                         </td>
                                     </tr>
                                 </table>
-                                <div v-else>
+                                <div class="alert alert-info" v-else>
                                     <!-- todo: localize -->
                                     No characters are registered to this game yet!
                                 </div>
@@ -73,14 +73,13 @@
                                         Join Game <!-- todo: add localization -->
                                     </div>
                                     <span class="btn btn-secondary" v-show="this.showCharacters" @click="hideUserCharacters()">Hide</span>
-                                    <div v-show="this.showCharacters">
+                                    <div v-if="authenticated" v-show="this.showCharacters" class="user-characters-list">
                                         <table v-show="!isUserRegistered() && isGamePending()" class="table table-light">
                                             <tr v-if="userCharacters.length === 0">
-                                                <td colspan="2">
+                                                <td class="alert-warning" colspan="2">
                                                     <!-- todo: localize -->
-                                                    <p class="warning">You have no characters that you can join with!</p>
-                                                    <p class="b-tooltip-warning">(Character must be alive, be of corresponding system and not be participation the not finished
-                                                        game)</p>
+                                                    <p>You have no characters that you can join with!</p>
+                                                    <p>(Character must be alive, be of corresponding system and not be participation the not finished game)</p>
                                                 </td>
                                             </tr>
                                             <tr v-else v-for="userCharacter in userCharacters">
@@ -92,6 +91,10 @@
                                         <div v-show="isUserRegistered()" class="alert alert-warning">You are already registered to this game!</div>
                                         <div v-show="!isUserRegistered() && getFreeSlotsCount() === 0" class="alert alert-warning">No free slots!</div>
                                         <div v-show="!isUserRegistered() && !isGamePending()" class="alert alert-warning">The game has been started!</div>
+                                    </div>
+                                    <div v-else class="alert alert-warning">
+                                        <!-- todo: localize -->
+                                        You need to perfrom login to be able register the game.
                                     </div>
                                 </div>
                             </div>
@@ -201,12 +204,12 @@
         font-size: 14px;
     }
 
-    .game-info-venue {
+    .game-info-venue, .game-info-gm {
         width: 57%;
         padding-right: 15px;
     }
 
-    .game-info-date {
+    .game-info-date, .game-info-status {
         width: 42%;
     }
 
@@ -267,7 +270,7 @@
             margin: 5% 0;
         }
 
-        .game-info-date, .game-info-title, .game-info-gm {
+        .game-info-date, .game-info-title, .game-info-gm, .game-info-status {
             width: auto;
         }
 

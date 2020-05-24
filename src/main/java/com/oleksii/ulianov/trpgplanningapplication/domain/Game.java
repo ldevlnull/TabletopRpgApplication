@@ -37,6 +37,10 @@ public class Game implements Serializable {
     @Column(name = "play_date", nullable = false)
     private Instant playDate;
 
+    @NotNull
+    @Column(name = "venue", nullable = false)
+    private String venue;
+
     @Column(name = "players_limit")
     private Integer playersLimit;
 
@@ -70,6 +74,7 @@ public class Game implements Serializable {
     private Set<Character> characters = new HashSet<>();
 
     @ManyToOne
+    @JsonIgnoreProperties("games")
     private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -127,6 +132,14 @@ public class Game implements Serializable {
     public Game pictureURL(String pictureURL) {
         this.pictureURL = pictureURL;
         return this;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 
     public void setPictureURL(String pictureURL) {

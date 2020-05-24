@@ -34,6 +34,9 @@ public class Character implements Serializable {
     @Column(name = "is_alive")
     private Boolean isAlive;
 
+    @Column(name = "is_available")
+    private Boolean isAvailable;
+
     @ManyToOne
     @JsonIgnoreProperties("characters")
     private User user;
@@ -41,6 +44,9 @@ public class Character implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("characters")
     private GameSystem gameSystem;
+
+    @Column(name = "picture_url", length = 2083)
+    private String pictureURL;
 
     @ManyToMany(mappedBy = "characters")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -115,6 +121,22 @@ public class Character implements Serializable {
     public Character games(Set<Game> games) {
         this.games = games;
         return this;
+    }
+
+    public String getPictureURL() {
+        return pictureURL;
+    }
+
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
+    }
+
+    public Boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
     }
 
     public Character addGame(Game game) {

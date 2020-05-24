@@ -147,5 +147,5 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "Це ваш футер"
+  "footer": "Сайт розроблений студентом групи ФЕІ-21 Ульяновом Олексієм 2020 (с) Всі права захищені!"
 }

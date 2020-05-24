@@ -22,6 +22,7 @@ export interface IGame {
   tags?: IGameTag[];
   characters?: ICharacter[];
   user?: IUser;
+  venue?: string;
 }
 
 export class Game implements IGame {
@@ -36,6 +37,7 @@ export class Game implements IGame {
     public gameSystem?: IGameSystem,
     public tags?: IGameTag[],
     public characters?: ICharacter[],
-    public user?: IUser
+    public user?: IUser,
+    public venue?: string
   ) {}
 }

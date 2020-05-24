@@ -40,6 +40,19 @@
                         </small>
                     </div>
                     <div class="form-group">
+                        <label class="form-control-label" v-text="$t('trpgPlanningApplicationApp.game.venue')" for="game-venue">Venue</label>
+                        <input type="text" class="form-control" name="venue" id="game-venue"
+                               :class="{'valid': !$v.game.venue.$invalid, 'invalid': $v.game.venue.$invalid }" v-model="$v.game.venue.$model" required/>
+                        <div v-if="$v.game.gameName.$anyDirty && $v.game.gameName.$invalid">
+                            <small class="form-text text-danger" v-if="!$v.game.venue.required" v-text="$t('entity.validation.required')">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger" v-if="!$v.game.venue.minLength">
+                                Venue of the game should be at least {{ $v.game.venue.$params.minLength.min }} symbols long.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="form-control-label" v-text="$t('trpgPlanningApplicationApp.game.playersLimit')" for="game-playersLimit">Players Limit</label>
                         <input type="number" class="form-control" name="playersLimit" id="game-playersLimit"
                                required
@@ -49,8 +62,9 @@
                         </small>
                     </div>
                     <div class="form-group">
-                        <div v-if="$v.game.pictureURL">
-                            <img :src="$v.game.pictureURL" alt>
+                        <div v-show="$v.game.pictureURL">
+                            <div class="alert alert-info">Image Preview</div>
+                            <img :src="$v.game.pictureURL" class="rounded mx-auto d-block" alt>
                         </div>
                         <label class="form-control-label" v-text="$t('trpgPlanningApplicationApp.game.pictureURL')" for="game-pictureURL">Picture URL</label>
                         <input type="url" class="form-control" name="pictureURL" id="game-pictureURL"

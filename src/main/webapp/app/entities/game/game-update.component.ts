@@ -32,6 +32,10 @@ const validations: any = {
       required,
       minLength: minLength(3)
     },
+    venue: {
+      required,
+      minLength: minLength(3)
+    },
     playDate: {
       required,
       minDate: minDate
@@ -67,7 +71,6 @@ export default class GameUpdate extends Vue {
   public gameTags: IGameTag[] = [];
 
   @Inject('characterService') private characterService: () => CharacterService;
-  @Inject('userManagementService') private userService: () => UserManagementService;
 
   public characters: ICharacter[] = [];
   public isSaving = false;
@@ -85,9 +88,6 @@ export default class GameUpdate extends Vue {
     this.game.status = GameStatus.PENDING;
     this.game.tags = [];
     this.game.characters = [];
-    this.userService()
-      .get(this.$store.getters.account.id)
-      .then(user => (this.game.user = user));
   }
 
   public save(): void {
@@ -102,6 +102,7 @@ export default class GameUpdate extends Vue {
           this.alertService().showAlert(message, 'info');
         });
     } else {
+      this.game.user = this.getUser();
       this.gameService()
         .create(this.game)
         .then(param => {
@@ -180,5 +181,9 @@ export default class GameUpdate extends Vue {
 
   public isFutureDate(): boolean {
     return this.game.playDate > new Date();
+  }
+
+  private getUser() {
+    return this.$store.getters.account;
   }
 }

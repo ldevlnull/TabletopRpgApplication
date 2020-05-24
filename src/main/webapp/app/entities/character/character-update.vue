@@ -26,6 +26,15 @@
                             <option v-bind:value="character.gameSystem && gameSystemOption.id === character.gameSystem.id ? character.gameSystem : gameSystemOption" v-for="gameSystemOption in gameSystems" :key="gameSystemOption.id">{{gameSystemOption.gameSystemName}}</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <div v-show="$v.character.pictureURL">
+                            <div class="alert alert-info">Image Preview</div>
+                            <img :src="$v.character.pictureURL" class="rounded mx-auto d-block" alt>
+                        </div>
+                        <label class="form-control-label" v-text="$t('trpgPlanningApplicationApp.character.pictureURL')" for="character-pictureURL">Character URL</label>
+                        <input type="url" class="form-control" name="pictureURL" id="character-pictureURL"
+                               :class="{'valid': !$v.character.pictureURL.$invalid, 'invalid': $v.character.pictureURL.$invalid }" v-model="$v.character.pictureURL.$model"/>
+                    </div>
                 </div>
                 <div>
                     <button type="button" id="cancel-save" class="btn btn-secondary" v-on:click="previousState()">

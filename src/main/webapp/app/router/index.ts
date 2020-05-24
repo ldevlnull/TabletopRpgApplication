@@ -7,7 +7,6 @@ Component.registerHooks([
 ]);
 import Router from 'vue-router';
 import { Authority } from '@/shared/security/authority';
-const Home = () => import('../core/home/home.vue');
 const Error = () => import('../core/error/error.vue');
 const Register = () => import('../account/register/register.vue');
 const Activate = () => import('../account/activate/activate.vue');
@@ -60,7 +59,7 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      redirect: '/game'
     },
     {
       path: '/forbidden',
@@ -246,7 +245,6 @@ export default new Router({
       path: '/game',
       name: 'Game',
       component: Game,
-      meta: { authorities: [Authority.USER] }
     },
     {
       path: '/game/new',
@@ -264,7 +262,6 @@ export default new Router({
       path: '/game/:gameId/view',
       name: 'GameView',
       component: GameDetails,
-      meta: { authorities: [Authority.USER] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   ]

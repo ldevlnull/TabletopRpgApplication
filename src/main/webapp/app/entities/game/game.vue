@@ -34,7 +34,7 @@
                                     :img-src="game.pictureURL"
                                     style="max-width: 300px;"
                                     img-height="400px"
-                                    class="pic img-responsive"
+                                    class="pic img-responsive rounded "
                                     img-alt="Game Picture"
                                     body-class="top align-text-top"
                                 >
