@@ -19,6 +19,7 @@ const validations: any = {
     characterName: {
       required
     },
+    pictureURL: {},
     isAlive: {}
   }
 };

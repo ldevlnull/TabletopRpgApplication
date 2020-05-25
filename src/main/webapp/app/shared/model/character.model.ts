@@ -9,8 +9,8 @@ export interface ICharacter {
   isAvailable?: boolean;
   user?: IUser;
   gameSystem?: IGameSystem;
-  pictureURL?: string;
   games?: IGame[];
+  pictureURL?: string;
 }
 
 export class Character implements ICharacter {
@@ -21,8 +21,8 @@ export class Character implements ICharacter {
     public isAvailable?: boolean,
     public user?: IUser,
     public gameSystem?: IGameSystem,
-    public pictureURL?: string,
-    public games?: IGame[]
+    public games?: IGame[],
+    public pictureURL?: string
   ) {
     this.isAlive = this.isAlive || false;
     this.isAvailable = this.isAvailable || true;
