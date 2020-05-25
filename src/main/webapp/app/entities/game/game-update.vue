@@ -62,9 +62,16 @@
                         </small>
                     </div>
                     <div class="form-group">
-                        <div v-show="$v.game.pictureURL">
+                        <div v-show="$v.game.pictureURL.$model !== ''" class="mx-auto d-block img-responsive rounded">
                             <div class="alert alert-info">Image Preview</div>
-                            <img :src="$v.game.pictureURL" class="rounded mx-auto d-block" alt>
+                            <b-card
+                                overlay
+                                :img-src="$v.game.pictureURL.$model"
+                                style="max-width: 300px;"
+                                img-height="400px"
+                                class="pic"
+                                img-alt="Game Picture"
+                            ></b-card>
                         </div>
                         <label class="form-control-label" v-text="$t('trpgPlanningApplicationApp.game.pictureURL')" for="game-pictureURL">Picture URL</label>
                         <input type="url" class="form-control" name="pictureURL" id="game-pictureURL"

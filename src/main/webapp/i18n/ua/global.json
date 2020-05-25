@@ -7,10 +7,10 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Сутності",
-        "gameSystem": "Game System",
-        "gameTag": "Game Tag",
-        "character": "Character",
-        "game": "Game",
+        "gameSystem": "Ігрові Системи",
+        "gameTag": "Теги",
+        "character": "Мої персонажі",
+        "game": "Ігри",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -45,7 +45,9 @@
       "confirmpassword.label": "Підтвердження нового пароля",
       "confirmpassword.placeholder": "Підтвердіть новий пароль",
       "email.label": "Електронна пошта",
-      "email.placeholder": "Ваша електронна пошта"
+      "email.placeholder": "Ваша електронна пошта",
+      "currentpassword.label": "Теперішній пароль",
+      "currentpassword.placeholder": "Ваш пароль"
     },
     "messages": {
       "info": {

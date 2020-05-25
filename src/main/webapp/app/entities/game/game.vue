@@ -2,7 +2,7 @@
     <div>
         <h2 id="page-heading">
             <span v-text="$t('trpgPlanningApplicationApp.game.home.title')" id="game-heading">Games</span>
-            <router-link :to="{name: 'GameCreate'}" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-game">
+            <router-link v-if="hasAnyAuthority('ROLE_GAME_MASTER')" :to="{name: 'GameCreate'}" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-game">
                 <font-awesome-icon icon="plus"></font-awesome-icon>
                 <span v-text="$t('trpgPlanningApplicationApp.game.home.createLabel')">
                     Create a new Game
@@ -18,7 +18,7 @@
         </b-alert>
         <br/>
         <div class="alert alert-warning" v-if="!isFetching && gamesByDays && gamesByDays.length === 0">
-            <span v-text="$t('trpgPlanningApplicationApp.game.home.notFound')">No games found</span>
+            <span class="alert alert-warning" v-text="$t('trpgPlanningApplicationApp.game.home.notFound')">No games are planned for now :(</span>
         </div>
         <div>
             <div class="games">
@@ -52,8 +52,17 @@
                                         </div>
                                     </div>
                                 </b-card>
-                                <div class="text-center text">{{game.gameName}}</div>
                             </router-link>
+                            <div class="text-center text">
+                                {{game.gameName}}
+                                <b-button v-if="hasAnyAuthority('ROLE_MODERATOR')" v-on:click="prepareRemove(game)"
+                                          variant="danger"
+                                          class="btn btn-sm"
+                                          v-b-modal.removeEntity>
+                                    <font-awesome-icon icon="times"></font-awesome-icon>
+                                    <span v-text="$t('entity.action.delete')">Delete</span>
+                                </b-button>
+                            </div>
                         </div>
                     </div>
                 </div>

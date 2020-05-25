@@ -9,7 +9,7 @@
         "main": "Entities",
         "gameSystem": "Game System",
         "gameTag": "Game Tag",
-        "character": "Character",
+        "character": "My Characters",
         "game": "Game",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },

@@ -25,6 +25,17 @@
                             :class="{'valid': !$v.gameSystem.description.$invalid, 'invalid': $v.gameSystem.description.$invalid }" v-model="$v.gameSystem.description.$model" />
                     </div>
                     <div class="form-group">
+                        <div v-show="$v.gameSystem.pictureURL.$model !== ''">
+                            <div class="alert alert-info">Image Preview</div>
+                            <b-card
+                                overlay
+                                :img-src="$v.gameSystem.pictureURL.$model"
+                                style="max-width: 64px;"
+                                img-height="64px"
+                                class="pic"
+                                img-alt="Game System Picture"
+                            ></b-card>
+                        </div>
                         <label class="form-control-label" v-text="$t('trpgPlanningApplicationApp.gameSystem.pictureURL')" for="game-system-pictureURL">Picture URL</label>
                         <input type="text" class="form-control" name="pictureURL" id="game-system-pictureURL"
                             :class="{'valid': !$v.gameSystem.pictureURL.$invalid, 'invalid': $v.gameSystem.pictureURL.$invalid }" v-model="$v.gameSystem.pictureURL.$model" />

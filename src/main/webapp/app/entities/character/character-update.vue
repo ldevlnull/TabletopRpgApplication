@@ -27,9 +27,16 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <div v-show="$v.character.pictureURL">
+                        <div v-show="$v.character.pictureURL.$model !== ''">
                             <div class="alert alert-info">Image Preview</div>
-                            <img :src="$v.character.pictureURL" class="rounded mx-auto d-block" alt>
+                            <b-card
+                                overlay
+                                :img-src="$v.character.pictureURL.$model"
+                                style="max-width: 100px;"
+                                img-height="100px"
+                                class="pic"
+                                img-alt="Character Picture"
+                            ></b-card>
                         </div>
                         <label class="form-control-label" v-text="$t('trpgPlanningApplicationApp.character.pictureURL')" for="character-pictureURL">Character URL</label>
                         <input type="url" class="form-control" name="pictureURL" id="character-pictureURL"
