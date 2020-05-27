@@ -94,6 +94,9 @@
         window.onload=function() {
             setTimeout(showError, 4000);
         }
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
         function showError() {
             var errorElm = document.getElementById("jhipster-error");
             if (errorElm && errorElm.style) {

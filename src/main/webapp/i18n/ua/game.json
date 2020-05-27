@@ -2,29 +2,31 @@
   "trpgPlanningApplicationApp": {
     "game": {
       "home": {
-        "title": "Games",
-        "createLabel": "Створити новий Game",
-        "createOrEditLabel": "Створити чи редагувати Game",
-        "notFound": "No Games found"
+        "title": "Ігри",
+        "createLabel": "Створити нову гру",
+        "createOrEditLabel": "Створити чи редагувати гру",
+        "notFound": "Ігор не знайдено"
       },
-      "created": "Новий Game створений з ідентифікатором {{ param }}",
-      "updated": "Game оновлений з ідентифікатором {{ param }}",
-      "deleted": "Game видалений з ідентифікатором {{ param }}",
+      "created": "Нова гра створена з ідентифікатором {{ param }}",
+      "updated": "Гра оновлена з ідентифікатором {{ param }}",
+      "deleted": "Гра видалена з ідентифікатором {{ param }}",
       "delete": {
-        "question": "Ви впевнені, що хочете видалити Game {{ id }}?"
+        "question": "Ви впевнені, що хочете видалити гру номер {{ id }}?"
       },
       "detail": {
-        "title": "Game"
+        "title": "Гра"
       },
-      "gameName": "Game Name",
-      "playDate": "Play Date",
-      "playersLimit": "Players Limit",
-      "pictureURL": "Picture URL",
-      "description": "Description",
-      "status": "Status",
-      "gameSystem": "Game System",
-      "tags": "Tags",
-      "characters": "Characters"
+      "gameName": "Назва гри",
+      "playDate": "Дата гри",
+      "playersLimit": "Максимальна кількість гравців",
+      "pictureURL": "Картинка",
+      "description": "Опис",
+      "status": "Статус",
+      "gameSystem": "Ігрова система",
+      "tags": "Теги",
+      "characters": "Гравці",
+      "venue": "Місце гри",
+      "user": "Ігровий Майстер"
     }
   }
 }

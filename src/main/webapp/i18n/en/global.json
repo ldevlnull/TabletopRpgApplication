@@ -9,7 +9,7 @@
         "main": "Entities",
         "gameSystem": "Game System",
         "gameTag": "Game Tag",
-        "character": "Character",
+        "character": "My Characters",
         "game": "Game",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
@@ -122,7 +122,17 @@
       "pattern": "This field should follow pattern for {{ pattern }}.",
       "number": "This field should be a number.",
       "datetimelocal": "This field should be a date and time.",
-      "patternLogin": "This field can only contain letters, digits and e-mail addresses."
+      "patternLogin": "This field can only contain letters, digits and e-mail addresses.",
+      "minDate": "This date cannot be in the past.",
+      "between": "The number of this field should be more than {{ min }} and less than {{ max }}",
+      "game": {
+        "gameName": {
+          "minLength": "Name of the game should be at least {{ $v.game.gameName.$params.minLength.min }} symbols long."
+        },
+        "playersLimit": {
+          "between": "The number of players limit should be in range from {{ $v.game.playersLimit.$params.between.min }} to {{ $v.game.playersLimit.$params.between.max }}."
+        }
+      }
     }
   },
   "error": {
@@ -140,5 +150,5 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "This is your footer"
+  "footer": "Application was developed by Oleksii Ulianov, Student of FEI-21 2020 (c) All rights reserved!"
 }

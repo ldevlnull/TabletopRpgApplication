@@ -2,29 +2,31 @@
   "trpgPlanningApplicationApp": {
     "game": {
       "home": {
-        "title": "Games",
-        "createLabel": "Создать новый Game",
-        "createOrEditLabel": "Создать или отредактировать Game",
-        "notFound": "No Games found"
+        "title": "Игры",
+        "createLabel": "Создать новую игру",
+        "createOrEditLabel": "Создать или отредактировать игру",
+        "notFound": "Игр не найдено."
       },
-      "created": "Новый Game создан с идентификатором {{ param }}",
-      "updated": "Game обновлен с идентификатором {{ param }}",
-      "deleted": "Game удален с идентификатором {{ param }}",
+      "created": "Новая игра создана с идентификатором {{ param }}",
+      "updated": "Игра обновлена с идентификатором {{ param }}",
+      "deleted": "Игра удалена с идентификатором {{ param }}",
       "delete": {
-        "question": "Вы уверены что хотите удалить Game {{ id }}?"
+        "question": "Вы уверены что хотите удалить игру {{ id }}?"
       },
       "detail": {
-        "title": "Game"
+        "title": "Игра"
       },
-      "gameName": "Game Name",
-      "playDate": "Play Date",
-      "playersLimit": "Players Limit",
-      "pictureURL": "Picture URL",
-      "description": "Description",
-      "status": "Status",
-      "gameSystem": "Game System",
-      "tags": "Tags",
-      "characters": "Characters"
+      "gameName": "Имя игры",
+      "playDate": "Дата игры",
+      "playersLimit": "Максимальное количество игроков",
+      "pictureURL": "Картинка",
+      "description": "Описание",
+      "status": "Статус",
+      "gameSystem": "Система игры",
+      "tags": "Тэги",
+      "characters": "Игроки",
+      "venue": "Место игры",
+      "user": "Игровой Мастер"
     }
   }
 }

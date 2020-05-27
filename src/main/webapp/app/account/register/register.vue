@@ -120,11 +120,6 @@
 
                     <button type="submit" :disabled="$v.registerAccount.$invalid || $v.confirmPassword.$invalid" class="btn btn-primary" v-text="$t('register.form.button')">Register</button>
                 </form>
-                <p></p>
-                <div class="alert alert-warning">
-                    <span v-text="$t('global.messages.info.authenticated.prefix')">If you want to </span>
-                    <a class="alert-link" v-on:click="openLogin()" v-text="$t('global.messages.info.authenticated.link')">sign in</a><span v-html="$t('global.messages.info.authenticated.suffix')">, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
-                </div>
             </div>
         </div>
     </div>

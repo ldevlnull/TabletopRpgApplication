@@ -20,14 +20,14 @@
                         <span v-text="$t('trpgPlanningApplicationApp.character.user')">User</span>
                     </dt>
                     <dd>
-                        {{character.user ? character.user.id : ''}}
+                        {{character.user ? character.user.login : ''}}
                     </dd>
                     <dt>
                         <span v-text="$t('trpgPlanningApplicationApp.character.gameSystem')">Game System</span>
                     </dt>
                     <dd>
                         <div v-if="character.gameSystem">
-                            <router-link :to="{name: 'GameSystemView', params: {gameSystemId: character.gameSystem.id}}">{{character.gameSystem.id}}</router-link>
+                            <router-link :to="{name: 'GameSystemView', params: {gameSystemId: character.gameSystem.id}}">{{character.gameSystem.gameSystemName}}</router-link>
                         </div>
                     </dd>
                 </dl>

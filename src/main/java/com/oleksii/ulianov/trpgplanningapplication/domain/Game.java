@@ -37,13 +37,17 @@ public class Game implements Serializable {
     @Column(name = "play_date", nullable = false)
     private Instant playDate;
 
+    @NotNull
+    @Column(name = "venue", nullable = false)
+    private String venue;
+
     @Column(name = "players_limit")
     private Integer playersLimit;
 
-    @Column(name = "picture_url")
+    @Column(name = "picture_url", length = 2083)
     private String pictureURL;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 8192)
     private String description;
 
     @NotNull
@@ -58,16 +62,20 @@ public class Game implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "game_tags",
-               joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "tags_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "tags_id", referencedColumnName = "id"))
     private Set<GameTag> tags = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "game_characters",
-               joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "characters_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "characters_id", referencedColumnName = "id"))
     private Set<Character> characters = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("games")
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -124,6 +132,14 @@ public class Game implements Serializable {
     public Game pictureURL(String pictureURL) {
         this.pictureURL = pictureURL;
         return this;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 
     public void setPictureURL(String pictureURL) {
@@ -190,6 +206,14 @@ public class Game implements Serializable {
         return this;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
     public void setTags(Set<GameTag> gameTags) {
         this.tags = gameTags;
     }
@@ -246,6 +270,7 @@ public class Game implements Serializable {
             ", pictureURL='" + getPictureURL() + "'" +
             ", description='" + getDescription() + "'" +
             ", status='" + getStatus() + "'" +
+            ", user'" + getUser() + "'" +
             "}";
     }
 }

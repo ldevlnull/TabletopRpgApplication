@@ -40,6 +40,9 @@ public class GameSystemResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
+    private static final String DEFAULT_PICTURE_URL = "AAAAAAAAAA";
+    private static final String UPDATED_PICTURE_URL = "BBBBBBBBBB";
+
     @Autowired
     private GameSystemRepository gameSystemRepository;
 
@@ -86,7 +89,8 @@ public class GameSystemResourceIT {
     public static GameSystem createEntity(EntityManager em) {
         GameSystem gameSystem = new GameSystem()
             .gameSystemName(DEFAULT_GAME_SYSTEM_NAME)
-            .description(DEFAULT_DESCRIPTION);
+            .description(DEFAULT_DESCRIPTION)
+            .pictureURL(DEFAULT_PICTURE_URL);
         return gameSystem;
     }
     /**
@@ -98,7 +102,8 @@ public class GameSystemResourceIT {
     public static GameSystem createUpdatedEntity(EntityManager em) {
         GameSystem gameSystem = new GameSystem()
             .gameSystemName(UPDATED_GAME_SYSTEM_NAME)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .pictureURL(UPDATED_PICTURE_URL);
         return gameSystem;
     }
 
@@ -124,6 +129,7 @@ public class GameSystemResourceIT {
         GameSystem testGameSystem = gameSystemList.get(gameSystemList.size() - 1);
         assertThat(testGameSystem.getGameSystemName()).isEqualTo(DEFAULT_GAME_SYSTEM_NAME);
         assertThat(testGameSystem.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testGameSystem.getPictureURL()).isEqualTo(DEFAULT_PICTURE_URL);
     }
 
     @Test
@@ -176,7 +182,8 @@ public class GameSystemResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(gameSystem.getId().intValue())))
             .andExpect(jsonPath("$.[*].gameSystemName").value(hasItem(DEFAULT_GAME_SYSTEM_NAME)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].pictureURL").value(hasItem(DEFAULT_PICTURE_URL)));
     }
     
     @Test
@@ -191,7 +198,8 @@ public class GameSystemResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(gameSystem.getId().intValue()))
             .andExpect(jsonPath("$.gameSystemName").value(DEFAULT_GAME_SYSTEM_NAME))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.pictureURL").value(DEFAULT_PICTURE_URL));
     }
 
     @Test
@@ -216,7 +224,8 @@ public class GameSystemResourceIT {
         em.detach(updatedGameSystem);
         updatedGameSystem
             .gameSystemName(UPDATED_GAME_SYSTEM_NAME)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .pictureURL(UPDATED_PICTURE_URL);
 
         restGameSystemMockMvc.perform(put("/api/game-systems")
             .contentType(TestUtil.APPLICATION_JSON)
@@ -229,6 +238,7 @@ public class GameSystemResourceIT {
         GameSystem testGameSystem = gameSystemList.get(gameSystemList.size() - 1);
         assertThat(testGameSystem.getGameSystemName()).isEqualTo(UPDATED_GAME_SYSTEM_NAME);
         assertThat(testGameSystem.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testGameSystem.getPictureURL()).isEqualTo(UPDATED_PICTURE_URL);
     }
 
     @Test

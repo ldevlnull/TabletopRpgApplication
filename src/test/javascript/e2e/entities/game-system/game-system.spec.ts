@@ -68,6 +68,9 @@ describe('GameSystem e2e test', () => {
       await updatePage.descriptionInput.sendKeys('description');
       expect(await updatePage.descriptionInput.getAttribute('value')).to.match(/description/);
 
+      await updatePage.pictureURLInput.sendKeys('pictureURL');
+      expect(await updatePage.pictureURLInput.getAttribute('value')).to.match(/pictureURL/);
+
       expect(await updatePage.saveButton.isEnabled()).to.be.true;
       await updatePage.saveButton.click();
 
@@ -131,6 +134,10 @@ describe('GameSystem e2e test', () => {
         await updatePage.descriptionInput.clear();
         await updatePage.descriptionInput.sendKeys('modified');
         expect(await updatePage.descriptionInput.getAttribute('value')).to.match(/modified/);
+
+        await updatePage.pictureURLInput.clear();
+        await updatePage.pictureURLInput.sendKeys('modified');
+        expect(await updatePage.pictureURLInput.getAttribute('value')).to.match(/modified/);
 
         await updatePage.saveButton.click();
 

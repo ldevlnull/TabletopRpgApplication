@@ -20,7 +20,8 @@
       "isAlive": "Is Alive",
       "user": "User",
       "gameSystem": "Game System",
-      "game": "Game"
+      "game": "Game",
+      "pictureURL": "Картинка персонажа"
     }
   }
 }

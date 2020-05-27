@@ -5,8 +5,11 @@ import com.oleksii.ulianov.trpgplanningapplication.domain.Game;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Interface for managing {@link Game}.
@@ -49,4 +52,11 @@ public interface GameService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Get all the games by each day in the map.
+     *
+     * @return map where the key is the day, and the value is set of games of this day.
+     */
+    Map<Instant, Set<Game>> findAllGamesGroupedByDays();
 }

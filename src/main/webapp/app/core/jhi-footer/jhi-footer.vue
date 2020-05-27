@@ -1,6 +1,6 @@
 <template>
-    <div id="footer" class="footer">
-        <p v-text="$t('footer')">This is your footer</p>
+    <div id="footer" class="footer bottom">
+        <p v-text="$t('footer')">Application was developed by Oleksii Ulianov, Student of FEI-21 2020 (c) All rights reserved!</p>
     </div>
 </template>
 
@@ -9,6 +9,6 @@
 
 <style scoped>
     .footer {
-        text-align: left;
+        text-align: center;
     }
 </style>

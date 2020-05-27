@@ -11,6 +11,10 @@
         {
             "fieldName": "description",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "pictureURL",
+            "fieldType": "String"
         }
     ],
     "relationships": [],
@@ -23,5 +27,7 @@
     "fluentMethods": true,
     "readOnly": false,
     "clientRootFolder": "",
-    "applications": "*"
+    "applications": "*",
+    "searchEngine": false,
+    "databaseType": "sql"
 }

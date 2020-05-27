@@ -10,7 +10,6 @@ import LoginForm from '@/account/login-form/login-form.vue';
     ribbon: Ribbon,
     'jhi-navbar': JhiNavbar,
     'login-form': LoginForm,
-
     'jhi-footer': JhiFooter
   }
 })

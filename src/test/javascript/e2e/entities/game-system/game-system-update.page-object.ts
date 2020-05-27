@@ -11,4 +11,6 @@ export default class GameSystemUpdatePage extends AlertPage {
   gameSystemNameInput: ElementFinder = element(by.css('input#game-system-gameSystemName'));
 
   descriptionInput: ElementFinder = element(by.css('input#game-system-description'));
+
+  pictureURLInput: ElementFinder = element(by.css('input#game-system-pictureURL'));
 }

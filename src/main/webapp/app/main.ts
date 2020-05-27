@@ -30,13 +30,44 @@ import GameSystemService from '@/entities/game-system/game-system.service';
 import GameTagService from '@/entities/game-tag/game-tag.service';
 import CharacterService from '@/entities/character/character.service';
 import GameService from '@/entities/game/game.service';
+import moment from 'moment';
+import $ from 'jquery';
+import BootstrapVue from 'bootstrap-vue';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
+Vue.prototype.moment = moment;
+Vue.prototype.$ = $;
+
+moment.updateLocale('en', {
+  months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+});
+
+moment.updateLocale('ru', {
+  months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
+});
+
+moment.updateLocale('ua', {
+  months: [
+    'Січень',
+    'Лютий',
+    'Березень',
+    'Квітень',
+    'Травень',
+    'Червень',
+    'Липень',
+    'Серпень',
+    'Вересень',
+    'Жовтень',
+    'Листопад',
+    'Грудень'
+  ]
+});
 
 Vue.config.productionTip = false;
 config.initVueApp(Vue);
 config.initFortAwesome(Vue);
 bootstrapVueConfig.initBootstrapVue(Vue);
 Vue.use(Vue2Filters);
+Vue.use(BootstrapVue);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('jhi-item-count', JhiItemCountComponent);
 Vue.component('jhi-sort-indicator', JhiSortIndicatorComponent);

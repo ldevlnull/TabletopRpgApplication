@@ -19,6 +19,7 @@ const validations: any = {
     characterName: {
       required
     },
+    pictureURL: {},
     isAlive: {}
   }
 };
@@ -55,6 +56,8 @@ export default class CharacterUpdate extends Vue {
 
   public save(): void {
     this.isSaving = true;
+    this.character.isAlive = true;
+    this.character.user = this.$store.getters.account;
     if (this.character.id) {
       this.characterService()
         .update(this.character)

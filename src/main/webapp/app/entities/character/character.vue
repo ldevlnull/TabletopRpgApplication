@@ -33,19 +33,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="character in characters"
-                    :key="character.id">
+                <tr v-for="character in characters" :key="character.id">
                     <td>
-                        <router-link :to="{name: 'CharacterView', params: {characterId: character.id}}">{{character.id}}</router-link>
+                        <b-card
+                            overlay
+                            :img-src="character.pictureURL"
+                            style="max-width: 64px;"
+                            img-height="64px"
+                            class="pic"
+                            img-alt="Character Picture"
+                        ></b-card>
                     </td>
                     <td>{{character.characterName}}</td>
                     <td>{{character.isAlive}}</td>
                     <td>
-                        {{character.user ? character.user.id : ''}}
+                        {{character.user ? character.user.login : ''}}
                     </td>
                     <td>
                         <div v-if="character.gameSystem">
-                            <router-link :to="{name: 'GameSystemView', params: {gameSystemId: character.gameSystem.id}}">{{character.gameSystem.id}}</router-link>
+                            <router-link :to="{name: 'GameSystemView', params: {gameSystemId: character.gameSystem.id}}">{{character.gameSystem.gameSystemName}}</router-link>
                         </div>
                     </td>
                     <td class="text-right">

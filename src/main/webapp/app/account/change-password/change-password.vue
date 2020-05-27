@@ -22,7 +22,7 @@
                         <input type="password" class="form-control" id="currentPassword" name="currentPassword"
                                :class="{'valid': !$v.resetPassword.currentPassword.$invalid, 'invalid': $v.resetPassword.currentPassword.$invalid }"
                                v-bind:placeholder="$t('global.form[\'currentpassword.placeholder\']')"
-                               v-model="$v.resetPassword.currentPassword.$model" required>
+                               v-model="$v.resetPassword.currentPassword.$model" required autocomplete="new-password">
                         <div v-if="$v.resetPassword.currentPassword.$anyDirty && $v.resetPassword.currentPassword.$invalid">
                             <small class="form-text text-danger"
                                    v-if="!$v.resetPassword.currentPassword.required" v-text="$t('global.messages.validate.newpassword.required')">
@@ -35,7 +35,7 @@
                         <input type="password" class="form-control" id="newPassword" name="newPassword"
                                v-bind:placeholder="$t('global.form[\'newpassword.placeholder\']')"
                                :class="{'valid': !$v.resetPassword.newPassword.$invalid, 'invalid': $v.resetPassword.newPassword.$invalid }"
-                               v-model="$v.resetPassword.newPassword.$model" minlength=4 maxlength=50 required>
+                               v-model="$v.resetPassword.newPassword.$model" minlength=4 maxlength=50 required autocomplete="new-password">
                         <div v-if="$v.resetPassword.newPassword.$anyDirty && $v.resetPassword.newPassword.$invalid">
                             <small class="form-text text-danger"
                                    v-if="!$v.resetPassword.newPassword.required" v-text="$t('global.messages.validate.newpassword.required')">

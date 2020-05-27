@@ -7,10 +7,10 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Сущности",
-        "gameSystem": "Game System",
-        "gameTag": "Game Tag",
-        "character": "Character",
-        "game": "Game",
+        "gameSystem": "Игровые Системы",
+        "gameTag": "Тэги",
+        "character": "Мои персонажи",
+        "game": "Игры",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -46,8 +46,8 @@
       "newpassword.placeholder": "Новый пароль",
       "confirmpassword.label": "Подтверждение нового пароля",
       "confirmpassword.placeholder": "Подтвердите новый пароль",
-      "email.label": "Email",
-      "email.placeholder": "Ваш email"
+      "email.label": "Электронная почта",
+      "email.placeholder": "Ваша почта"
     },
     "messages": {
       "info": {
@@ -121,7 +121,17 @@
       "maxbytes": "Это поле не может быть больше, чем {{max}} байтов.",
       "pattern": "Это поле должно следовать модели {{pattern}}.",
       "number": "Это поле должно быть число.",
-      "datetimelocal": "Это поле должно быть дата и время."
+      "datetimelocal": "Это поле должно быть дата и время.",
+      "minDate": "Дата не может быть в прошлом.",
+      "between": "Это поле должно быть от {{ min }} до {{ max }}.",
+      "game": {
+        "gameName": {
+          "minLength": "Имя игры должно быть хотя бы {{ $v.game.gameName.$params.minLength.min }} символов в длину."
+        },
+        "playersLimit": {
+          "between": "Ограничение количества игроков должно быть в диапазоне от {{ $v.game.playersLimit.$params.between.min }} до {{ $v.game.playersLimit.$params.between.max }}."
+        }
+      }
     }
   },
   "error": {
@@ -139,5 +149,5 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "Это ваш футтер"
+  "footer": "Сайт разработан студентом группы ФЕИ-21 Ульяновом Алексеем (c) Все права защищены!"
 }

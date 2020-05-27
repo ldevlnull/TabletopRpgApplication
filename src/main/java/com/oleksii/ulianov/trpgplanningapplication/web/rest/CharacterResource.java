@@ -99,6 +99,19 @@ public class CharacterResource {
     }
 
     /**
+     * {@code GET  /characters/user/:userId} : get all the character of the provided user.
+     *
+     * @param userId the id of the user.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of characters in body.
+     */
+    @GetMapping("/characters/user/{userId}")
+    public ResponseEntity<List<Character>> getAllCharacters(@PathVariable Long userId) {
+        log.debug("REST request to get a list of Characters");
+        List<Character> list = characterService.findAllByUserId(userId);
+        return ResponseEntity.ok().body(list);
+    }
+
+    /**
      * {@code GET  /characters/:id} : get the "id" character.
      *
      * @param id the id of the character to retrieve.

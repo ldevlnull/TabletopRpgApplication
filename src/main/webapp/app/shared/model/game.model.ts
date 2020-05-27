@@ -1,6 +1,7 @@
 import { IGameSystem } from '@/shared/model/game-system.model';
 import { IGameTag } from '@/shared/model/game-tag.model';
 import { ICharacter } from '@/shared/model/character.model';
+import { IUser } from '@/shared/model/user.model';
 
 export const enum GameStatus {
   PENDING = 'PENDING',
@@ -20,6 +21,8 @@ export interface IGame {
   gameSystem?: IGameSystem;
   tags?: IGameTag[];
   characters?: ICharacter[];
+  user?: IUser;
+  venue?: string;
 }
 
 export class Game implements IGame {
@@ -33,6 +36,8 @@ export class Game implements IGame {
     public status?: GameStatus,
     public gameSystem?: IGameSystem,
     public tags?: IGameTag[],
-    public characters?: ICharacter[]
+    public characters?: ICharacter[],
+    public user?: IUser,
+    public venue?: string
   ) {}
 }

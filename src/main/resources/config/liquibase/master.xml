@@ -13,13 +13,13 @@
     <property name="clobType" value="clob" dbms="mysql, oracle, mssql, mariadb, postgresql"/>
     <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
-    <include file="/app/src/main/resources/config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="/app/src/main/resources/config/liquibase/changelog/20200216230000_added_entity_GameSystem.xml" relativeToChangelogFile="false"/>
-    <include file="/app/src/main/resources/config/liquibase/changelog/20200216230100_added_entity_GameTag.xml" relativeToChangelogFile="false"/>
-    <include file="/app/src/main/resources/config/liquibase/changelog/20200216230200_added_entity_Character.xml" relativeToChangelogFile="false"/>
-    <include file="/app/src/main/resources/config/liquibase/changelog/20200216230300_added_entity_Game.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200216230000_added_entity_GameSystem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200216230100_added_entity_GameTag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200216230200_added_entity_Character.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200216230300_added_entity_Game.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
-    <include file="/app/src/main/resources/config/liquibase/changelog/20200216230200_added_entity_constraints_Character.xml" relativeToChangelogFile="false"/>
-    <include file="/app/src/main/resources/config/liquibase/changelog/20200216230300_added_entity_constraints_Game.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200216230200_added_entity_constraints_Character.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200216230300_added_entity_constraints_Game.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
